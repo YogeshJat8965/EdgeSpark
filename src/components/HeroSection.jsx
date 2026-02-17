@@ -126,12 +126,12 @@ const HeroSection = () => {
       zIndex: 20,
     },
     logoMain: {
-      fontSize: isMobile ? '20px' : '44px', // Slightly smaller on mobile
+      fontSize: isMobile ? '34px' : '44px', // Slightly smaller on mobile
       fontWeight: '600',
       margin: 0,
     },
     logoSub: {
-      fontSize: isMobile ? '11px' : '18px', // Slightly smaller on mobile
+      fontSize: isMobile ? '14px' : '18px', // Slightly smaller on mobile
       fontWeight: '300',
       opacity: 0.8,
       margin: 0,
@@ -203,7 +203,7 @@ const HeroSection = () => {
     },
     scrollIndicator: {
       position: 'absolute',
-      bottom: '30px',
+      bottom: isMobile ? '60px' : '30px', // Move up on mobile for better visibility
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
