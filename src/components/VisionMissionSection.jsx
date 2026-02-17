@@ -92,7 +92,7 @@ const VisionMissionSection = () => {
       margin: 0,
     },
     itemText: {
-      fontSize: '19px', // Increased from 15px
+      fontSize: '15px', // Increased from 15px
       lineHeight: 1.7,
       margin: 0,
       opacity: 0.8,

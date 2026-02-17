@@ -14,7 +14,7 @@ const AboutSection = () => {
       display: 'flex',
       justifyContent: 'center',
       padding: '80px 40px',
-      backgroundColor: '#f8f9fa', // A light off-white background
+      backgroundColor: '#ffffff', // White background
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       color: '#212529', // A dark color for text
       boxSizing: 'border-box',
@@ -41,10 +41,12 @@ const AboutSection = () => {
       justifyContent: 'center',
     },
     heading: {
-      fontSize: 'clamp(2rem, 5vw, 2.75rem)',
-      fontWeight: '600',
+      fontSize: 'clamp(1.75rem, 4.5vw, 2.5rem)',
+      fontWeight: '700',
       lineHeight: 1.3,
-      marginBottom: '24px',
+      marginBottom: '32px',
+      color: '#1a202c',
+      maxWidth: '600px',
     },
     paragraph: {
       fontSize: '16px',
@@ -68,11 +70,9 @@ const AboutSection = () => {
       <div style={styles.contentWrapper}>
         <div style={styles.textContainer}>
           <h2 style={styles.heading}>
-            EdgeSpark IT Ventures
+            EdgeSpark IT Ventures:<br />
+            Building What's Next
           </h2>
-          <div style={{ fontSize: '1.35rem', fontWeight: '600', marginBottom: '24px', color: '#2c3033ff' }}>
-    Building What's Next
-  </div>
           <p style={styles.paragraph}>
             EdgeSpark is a future-forward venture studio powering
             businesses at the intersection of AI,<b>Technology</b> , <b>Media</b> , and

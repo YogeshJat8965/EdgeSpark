@@ -92,6 +92,7 @@ function InnovationEcosystem() {
             max-width: 1000px;
             margin: 0 auto;
             line-height: 1.6;
+            font-weight: 700; /* Bold */
           }
 
           .ventures-grid {
@@ -179,14 +180,14 @@ function InnovationEcosystem() {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #eff6ff; /* Light blue background for the circle */
-            color: #2563eb; /* Darker blue for the arrow icon */
+            background-color: #11153f; /* Dark blue background for the circle */
+            color: #ffffff; /* White arrow icon */
             text-decoration: none; /* Remove underline from link */
             transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
           }
 
           .venture-card:hover .card-arrow-link {
-            background-color: #dbeafe; /* Slightly darker blue on hover */
+            background-color: #1a1f4f; /* Slightly lighter blue on hover */
             transform: translateX(3px) translateY(-3px); /* Move towards top-right */
           }
 
@@ -195,10 +196,11 @@ function InnovationEcosystem() {
             height: 20px;
             stroke-width: 2.5; /* Make arrow slightly bolder */
             transition: transform 0.3s ease-in-out;
+            transform: rotate(-45deg); /* Point 45 degrees up */
           }
 
           .venture-card:hover .arrow-icon {
-            transform: rotate(-45deg) scale(1.1); /* Rotate to point top-right and scale up */
+            transform: rotate(-45deg) scale(1.15); /* Keep 45 degree angle and scale up on hover */
           }
 
           /* --- Mobile Layout (Phone Screen) --- */
@@ -273,7 +275,7 @@ function InnovationEcosystem() {
 
       <div className="app-container" id="innovation-ecosystem">
         <div className="header-section">
-          <h1 className="main-heading">Explore Our Innovation Ecosystem</h1>
+          <h1 className="main-heading">Explore Our Innovation <br /> Ecosystem</h1>
           <p className="sub-heading">
             From AI automation to media excellence, our several innovative ventures are built to reshape industries. <br />Each venture is mission-driven, impact-oriented, and future-ready.
           </p>
