@@ -144,7 +144,7 @@ const HeroSection = () => {
       alignItems: 'center',
       maxWidth: '1000px',
       zIndex: 20,
-      marginTop: isMobile ? '20px' : '0', // Reduced from 60px to 20px to close the gap
+      marginTop: isMobile ? '-115px' : '0', // Further reduced to minimize gap on mobile
     },
     heading: {
       fontSize: 'clamp(1.8rem, 6vw, 4.5rem)',
