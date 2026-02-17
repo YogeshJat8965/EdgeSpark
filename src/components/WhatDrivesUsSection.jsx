@@ -85,6 +85,7 @@ function WhatDrivesUsSection() {
             font-size: 2.1rem !important;
             color: #4a5568;
             line-height: 1.7;
+            font-weight: 700; /* Bold */
           }
 
           .values-grid {
@@ -152,7 +153,7 @@ function WhatDrivesUsSection() {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            filter: brightness(0); /* Make icons black */
           }
 
           .value-card:hover .card-icon {
@@ -161,7 +162,7 @@ function WhatDrivesUsSection() {
           }
 
           .value-card:hover .card-icon img {
-            filter: drop-shadow(0 4px 12px rgba(59,130,246,0.25)) brightness(1.1);
+            filter: brightness(0); /* Keep icons black on hover */
           }
 
           @keyframes iconEntrance {
@@ -172,7 +173,7 @@ function WhatDrivesUsSection() {
           .card-title { 
             font-size: 1.4rem !important;
             font-weight: 700 !important;
-            color: #1a202c !important;
+            color: #000000 !important; /* Black */
             margin-bottom: 14px;
             line-height: 1.3;
             letter-spacing: 0.3px;
@@ -180,7 +181,7 @@ function WhatDrivesUsSection() {
 
           .card-description {
             font-size: 1.08rem;
-            color: #4a5568;
+            color: #000000; /* Black */
             line-height: 1.7;
           }
         `}

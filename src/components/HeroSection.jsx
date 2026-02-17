@@ -126,12 +126,12 @@ const HeroSection = () => {
       zIndex: 20,
     },
     logoMain: {
-      fontSize: isMobile ? '20px' : '22px', // Slightly smaller on mobile
+      fontSize: isMobile ? '20px' : '44px', // Slightly smaller on mobile
       fontWeight: '600',
       margin: 0,
     },
     logoSub: {
-      fontSize: isMobile ? '11px' : '12px', // Slightly smaller on mobile
+      fontSize: isMobile ? '11px' : '18px', // Slightly smaller on mobile
       fontWeight: '300',
       opacity: 0.8,
       margin: 0,

@@ -166,9 +166,9 @@ Message: ${formData.message}
           }
 
           .contact-card {
-            background-color: #f8f8fa; /* Light grey background for contact cards */
-            border-radius: 12px;
-            padding: 30px; /* Padding inside contact cards */
+            background-color: #f7f9fc; /* Light grey background for contact cards */
+            border-radius: 8px;
+            padding: 28px; /* Padding inside contact cards */
             display: flex;
             align-items: center; /* Vertically center icon and text */
             gap: 20px; /* Space between icon and text */
@@ -176,10 +176,10 @@ Message: ${formData.message}
           }
 
           .contact-icon {
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             flex-shrink: 0; /* Prevent icon from shrinking */
-            color: #3b82f6; /* Blue icon color */
+            color: #4f46e5; /* Purple/indigo icon color */
           }
 
           .contact-icon svg {
@@ -189,36 +189,36 @@ Message: ${formData.message}
 
           .contact-details p {
             margin: 0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #4a5568;
             line-height: 1.5;
           }
 
           .contact-details .highlight {
             font-weight: 600; /* Semi-bold for phone/email */
-            color: #3b82f6; /* Blue color for highlight */
-            font-size: 1.05rem; /* Slightly larger for highlight */
+            color: #4f46e5; /* Purple/indigo color for highlight */
+            font-size: 1rem; /* Same size as main text */
           }
 
           /* --- Right Column: Get a Call Back Form --- */
           .get-call-back-form-card {
             background-color: #ffffff; /* White background for the form card */
-            border-radius: 12px;
-            padding: 40px; /* Padding inside the form card */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for the form card */
+            border-radius: 8px;
+            padding: 36px; /* Padding inside the form card */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow for the form card */
           }
 
           .get-call-back-form-card h3 {
-            font-size: 1.8rem; /* Form title font size */
+            font-size: 1.75rem; /* Form title font size */
             font-weight: 700; /* Bold */
             color: #1a202c; /* Dark text */
-            margin-bottom: 30px; /* Space below form title */
+            margin-bottom: 28px; /* Space below form title */
           }
 
           .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr; /* Two columns for form fields */
-            gap: 20px; /* Space between form fields */
+            gap: 18px; /* Space between form fields */
           }
 
           .form-group {
@@ -231,9 +231,9 @@ Message: ${formData.message}
           }
 
           .form-group label {
-            font-size: 0.9rem;
-            color: #4a5568;
-            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: #374151;
+            margin-bottom: 6px;
             font-weight: 500; /* Medium weight for labels */
           }
 
@@ -248,12 +248,12 @@ Message: ${formData.message}
           .form-group select,
           .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e2e8f0; /* Light grey border */
-            border-radius: 8px;
-            font-size: 1rem;
-            color: #4a5568;
-            background-color: #f8f8fa; /* Light grey background for inputs */
+            padding: 11px 14px;
+            border: 1px solid #e5e7eb; /* Light grey border */
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #374151;
+            background-color: #ffffff; /* White background for inputs */
             box-sizing: border-box; /* Include padding in element's total width/height */
             transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             -webkit-appearance: none; /* Remove default styling for select */
@@ -272,8 +272,8 @@ Message: ${formData.message}
           .form-group select:focus,
           .form-group textarea:focus {
             outline: none;
-            border-color: #3b82f6; /* Blue border on focus */
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Subtle blue glow on focus */
+            border-color: #4f46e5; /* Indigo border on focus */
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); /* Subtle indigo glow on focus */
             background-color: #ffffff; /* White background on focus */
           }
 
@@ -294,12 +294,12 @@ Message: ${formData.message}
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
-            background-color: #2e3092; /* Dark blue button background */
+            padding: 12px 24px;
+            background-color: #4338ca; /* Indigo button background */
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             color: #ffffff;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease-in-out;
@@ -307,9 +307,9 @@ Message: ${formData.message}
           }
 
           .submit-button:hover {
-            background-color: #3b82f6; /* Lighter blue on hover */
+            background-color: #4f46e5; /* Lighter indigo on hover */
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(46, 48, 146, 0.4);
+            box-shadow: 0 6px 12px rgba(67, 56, 202, 0.4);
           }
 
           .submit-button:disabled {
@@ -422,7 +422,7 @@ Message: ${formData.message}
               </div>
               <div className="contact-details">
                 <p>For more queries, speak to</p>
-                <p className="highlight">+91-7304670468</p>
+                <p className="highlight">+91 12345 6789</p>
               </div>
             </div>
 
@@ -434,7 +434,7 @@ Message: ${formData.message}
               </div>
               <div className="contact-details">
                 <p>Email Us</p>
-                <p className="highlight">contactus@edgespark.com</p>
+                <p className="highlight">contactus@.com</p>
               </div>
             </div>
           </div>
@@ -443,29 +443,29 @@ Message: ${formData.message}
           <div className="get-call-back-form-card">
             <h3>Get a Call Back</h3>
             <form className="form-grid" onSubmit={handleSubmit}>
-              <div className="form-group">
+              <div className="form-group full-width">
                 <label htmlFor="fullName">
-                  Full Name<span className="required">*</span>
+                  Full Name
                 </label>
                 <input 
                   type="text" 
                   id="fullName" 
                   name="fullName" 
-                  placeholder="Enter your full name" 
+                  placeholder="" 
                   value={formData.fullName}
                   onChange={handleInputChange}
                   required 
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group full-width">
                 <label htmlFor="emailAddress">
-                  Email Address<span className="required">*</span>
+                  Email Address
                 </label>
                 <input 
                   type="email" 
                   id="emailAddress" 
                   name="emailAddress" 
-                  placeholder="Enter your email address" 
+                  placeholder="" 
                   value={formData.emailAddress}
                   onChange={handleInputChange}
                   required 
@@ -473,13 +473,13 @@ Message: ${formData.message}
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">
-                  Phone Number<span className="required">*</span>
+                  Phone Number
                 </label>
                 <input 
                   type="tel" 
                   id="phoneNumber" 
                   name="phoneNumber" 
-                  placeholder="Enter your phone number" 
+                  placeholder="" 
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   required 
@@ -487,13 +487,13 @@ Message: ${formData.message}
               </div>
               <div className="form-group">
                 <label htmlFor="companyName">
-                  Company Name<span className="required">*</span>
+                  Company Name
                 </label>
                 <input 
                   type="text" 
                   id="companyName" 
                   name="companyName" 
-                  placeholder="Enter your company name" 
+                  placeholder="" 
                   value={formData.companyName}
                   onChange={handleInputChange}
                   required 
@@ -501,7 +501,7 @@ Message: ${formData.message}
               </div>
               <div className="form-group">
                 <label htmlFor="industry">
-                  Industry<span className="required">*</span>
+                  Industry
                 </label>
                 <select 
                   id="industry" 
@@ -527,7 +527,7 @@ Message: ${formData.message}
               </div>
               <div className="form-group">
                 <label htmlFor="interestedIn">
-                  Interested In<span className="required">*</span>
+                  Interested In
                 </label>
                 <select 
                   id="interestedIn" 
@@ -549,13 +549,13 @@ Message: ${formData.message}
               </div>
               <div className="form-group full-width">
                 <label htmlFor="message">
-                  Message<span className="required">*</span>
+                  Message
                 </label>
                 <textarea 
                   id="message" 
                   name="message" 
                   rows="4" 
-                  placeholder="Tell us about your project requirements or any specific questions you have..."
+                  placeholder=""
                   value={formData.message}
                   onChange={handleInputChange}
                   required

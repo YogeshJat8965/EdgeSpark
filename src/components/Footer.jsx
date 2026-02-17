@@ -22,8 +22,8 @@ const Footer = () => {
   const styles = {
     container: {
       width: '100%',
-      padding: '80px 40px',
-      backgroundColor: '#f0f2f8', // Light lavender-blue background
+      padding: '60px 40px 40px 40px',
+      backgroundColor: '#e8eaf3', // Light lavender background
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       color: '#333d5a', // Default text color
       boxSizing: 'border-box',
@@ -32,29 +32,36 @@ const Footer = () => {
       maxWidth: '1200px',
       margin: '0 auto',
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '40px',
+      gridTemplateColumns: '1.5fr 1fr 1fr 1fr',
+      gap: '50px',
     },
     logoColumn: {
       gridColumn: 'span 1',
     },
     logo: {
-      fontSize: '2rem',
-      fontWeight: 'bold',
+      fontSize: '1.8rem',
+      fontWeight: '700',
       color: '#0a0f2c',
-      marginBottom: '24px',
+      marginBottom: '28px',
+      letterSpacing: '-0.5px',
+    },
+    logoImage: {
+      height: '50px',
+      marginBottom: '28px',
+      display: 'block',
     },
     infoText: {
-      fontSize: '0.95rem',
+      fontSize: '0.9rem',
       lineHeight: 1.7,
-      marginBottom: '16px',
+      marginBottom: '18px',
+      color: '#4a5568',
     },
     column: {
       gridColumn: 'span 1',
     },
     heading: {
-      fontSize: '1.1rem',
-      fontWeight: '600',
+      fontSize: '1.05rem',
+      fontWeight: '700',
       color: '#0a0f2c',
       marginBottom: '20px',
     },
@@ -65,33 +72,58 @@ const Footer = () => {
     },
     linkItem: {
       marginBottom: '12px',
-      fontSize: '0.95rem',
+      fontSize: '0.9rem',
       cursor: 'pointer',
       transition: 'color 0.2s ease',
+      color: '#4a5568',
     },
     linkItemHover: {
       color: '#0a0f2c',
     },
     addressText: {
-        fontSize: '0.95rem',
+        fontSize: '0.9rem',
         lineHeight: 1.7,
+        color: '#4a5568',
     },
     presencesContainer: {
         marginTop: '32px'
     },
     presencesText: {
-        fontSize: '0.95rem',
+        fontSize: '0.9rem',
         lineHeight: 1.7,
+        color: '#4a5568',
     }
   };
 
   // --- Rendered Component ---
   return (
-    <footer style={styles.container}>
-      <div style={styles.contentWrapper}>
-        
-        {/* Column 1: Logo and Info */}
-        <div style={styles.logoColumn}>
+    <>
+      <style>
+        {`
+          @media (max-width: 992px) {
+            .footer-content-wrapper {
+              grid-template-columns: 1fr 1fr !important;
+              gap: 40px !important;
+            }
+          }
+          @media (max-width: 640px) {
+            .footer-content-wrapper {
+              grid-template-columns: 1fr !important;
+              gap: 35px !important;
+            }
+          }
+        `}
+      </style>
+      <footer style={styles.container}>
+        <div style={styles.contentWrapper} className="footer-content-wrapper">
+          
+          {/* Column 1: Logo and Info */}
+          <div style={styles.logoColumn}>
+          <img 
+            src={require('../images/Edgespark/Image 6.png')} 
+            alt="EdgeSpark Logo" 
+            style={styles.logoImage}
+          />
           <p style={styles.infoText}>
             EdgeSpark, AI LifeBOT, Appsolutely.ai, CXO TechBOT, and Skillzza are trademarks of the EdgeSpark Group.
           </p>
@@ -108,7 +140,7 @@ const Footer = () => {
               style={styles.linkItem}
               onClick={() => scrollToSection('about-section')}
               onMouseOver={(e) => e.target.style.color = '#0a0f2c'}
-              onMouseOut={(e) => e.target.style.color = '#333d5a'}
+              onMouseOut={(e) => e.target.style.color = '#4a5568'}
             >
               About us
             </li>
@@ -116,7 +148,7 @@ const Footer = () => {
               style={styles.linkItem}
               onClick={() => scrollToSection('vision-mission-section')}
               onMouseOver={(e) => e.target.style.color = '#0a0f2c'}
-              onMouseOut={(e) => e.target.style.color = '#333d5a'}
+              onMouseOut={(e) => e.target.style.color = '#4a5568'}
             >
               Vision & Mission
             </li>
@@ -124,7 +156,7 @@ const Footer = () => {
               style={styles.linkItem}
               onClick={() => scrollToSection('offerings-section')}
               onMouseOver={(e) => e.target.style.color = '#0a0f2c'}
-              onMouseOut={(e) => e.target.style.color = '#333d5a'}
+              onMouseOut={(e) => e.target.style.color = '#4a5568'}
             >
               Our Services
             </li>
@@ -132,7 +164,7 @@ const Footer = () => {
               style={styles.linkItem}
               onClick={() => scrollToSection('contact-section')}
               onMouseOver={(e) => e.target.style.color = '#0a0f2c'}
-              onMouseOut={(e) => e.target.style.color = '#333d5a'}
+              onMouseOut={(e) => e.target.style.color = '#4a5568'}
             >
               Contact Us
             </li>
@@ -168,6 +200,7 @@ const Footer = () => {
 
       </div>
     </footer>
+    </>
   );
 };
 

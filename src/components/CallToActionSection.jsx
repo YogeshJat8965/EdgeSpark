@@ -45,12 +45,12 @@ const CallToActionSection = () => {
   const styles = {
     container: {
       position: 'relative',
-      padding: '80px 20px',
+      padding: '120px 20px',
       textAlign: 'center',
       color: '#ffffff',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       overflow: 'hidden',
-      minHeight: '400px',
+      minHeight: '450px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -175,11 +175,12 @@ const CallToActionSection = () => {
       {/* Content */}
       <div style={styles.content}>
         <h2 style={styles.title}>
-          Ready to Transform Your Business?
+          Let's Build the Future,<br />
+Together.
         </h2>
         <p style={styles.description}>
-          Join the innovation revolution. Let's build the future of your industry together 
-          with cutting-edge AI solutions and digital transformation strategies.
+          Transform your business with cutting-edge Al, sustainable solutions,
+and a future-ready workforce that drives impact and innovation.
         </p>
         <div style={styles.buttonContainer}>
           <button
@@ -188,23 +189,23 @@ const CallToActionSection = () => {
             onMouseLeave={() => setPrimaryHover(false)}
             onClick={handleGetStarted}
           >
-            Get Started Today
+            Start a Conversation
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 17L17 7"></path>
               <path d="M7 7h10v10"></path>
             </svg>
           </button>
-          <button
+          {/* <button
             style={secondaryButtonStyle}
             onMouseEnter={() => setSecondaryHover(true)}
             onMouseLeave={() => setSecondaryHover(false)}
             onClick={handleScheduleCall}
-          >
-            Schedule a Call
+          > */}
+            {/* Start a Conversation
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-          </button>
+            </svg> */}
+          {/* </button> */}
         </div>
       </div>
     </section>

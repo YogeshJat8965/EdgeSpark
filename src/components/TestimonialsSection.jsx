@@ -68,7 +68,7 @@ const TestimonialsSection = () => {
       maxWidth: '900px', // Increased from 900px
       margin: '0 auto',
       padding: '80px 100px', // Increased padding
-      backgroundColor: '#f0f4f8',
+      backgroundColor: '#eff1fc',
       borderRadius: '16px',
       display: 'flex',
       alignItems: 'center',
@@ -91,10 +91,10 @@ const TestimonialsSection = () => {
     author: {
       fontSize: '1rem',
       fontWeight: '600',
-      color: '#0a0f2c',
+      color: '#4f4c97',
     },
     arrowButton: {
-      backgroundColor: '#0a0f2c',
+      backgroundColor: '#07016a',
       border: 'none',
       borderRadius: '50%',
       width: '48px',
@@ -142,8 +142,7 @@ const TestimonialsSection = () => {
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>
-        Customer Speaks..
-        <br />Real Stories. Real Impact.
+        Customer Speaks..Real Stories. <br /> Real Impact.
       </h2>
       <div style={styles.sliderContainer}>
         <ArrowButton direction="left" onClick={() => handleNavigation('prev')} />

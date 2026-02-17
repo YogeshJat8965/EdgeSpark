@@ -80,6 +80,14 @@ const VisionMissionSection = () => {
       flexDirection: 'column',
       gap: '16px',
     },
+    missionItem: {
+      flex: 1,
+      minWidth: '250px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '16px',
+      marginTop: '60px', // Position mission lower than vision
+    },
     itemHeader: {
       display: 'flex',
       alignItems: 'center',
@@ -129,7 +137,7 @@ const VisionMissionSection = () => {
               To lead the next wave of global transformation by delivering AI-driven, human-centered, and sustainable solutions that redefine industries, enhance enterprise resilience, and create meaningful impact for people and the planet.
             </p>
           </div>
-          <div style={styles.visionMissionItem}>
+          <div style={styles.missionItem}>
             <div style={styles.itemHeader}>
               <MissionIcon />
               <h3 style={styles.itemHeading}>Our MISSION</h3>

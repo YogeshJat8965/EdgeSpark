@@ -8,15 +8,15 @@ const OfferingsSection = () => {
 
   // --- Data for the 9 offering cards ---
   const offerings = [
-    { title: 'AI & Business Automation', imgSrc: require('../images/what we offer images/Group 24323 (Copy).png') },
-    { title: 'Custom GenAI & Enterprise Copilots', imgSrc: require('../images/what we offer images/Group 24323.png') },
-    { title: 'Sustainable AI & Green Tech', imgSrc: require('../images/what we offer images/Group 24324.png') },
-    { title: 'Future-Ready Skilling & EdTech Solutions', imgSrc: require('../images/what we offer images/Group 24327.png') },
-    { title: 'Digital Transformation & IT Consulting', imgSrc: require('../images/what we offer images/Group 24326.png') },
-    { title: 'Smart Governance & GovTech Solutions', imgSrc: require('../images/what we offer images/Group 24325.png') },
-    { title: 'CXO Media, Branding & Thought Leadership', imgSrc: require('../images/business-meeting-office.jpg') },
-    { title: 'Innovation Lab & Prototyping', imgSrc: require('../images/what we offer images/Group 24329.png') },
-    { title: 'CSR, Women Empowerment & Social Innovation', imgSrc: require('../images/what we offer images/Group 24328.png') },
+    { title: <>AI & Business<br />Automation</>, imgSrc: require('../images/what we offer images/innovation.png') },
+    { title: <>Custom GenAI &<br />Enterprise Copilots</>, imgSrc: require('../images/what we offer images/Group 24323.png') },
+    { title: <>Sustainable AI &<br />Green Tech</>, imgSrc: require('../images/what we offer images/Group 24324.png') },
+    { title: <>Future-Ready Skilling &<br />EdTech Solutions</>, imgSrc: require('../images/what we offer images/Group 24327.png') },
+    { title: <>Digital Transformation &<br />IT Consulting</>, imgSrc: require('../images/what we offer images/Group 24326.png') },
+    { title: <>Smart Governance &<br />GovTech Solutions</>, imgSrc: require('../images/what we offer images/Group 24325.png') },
+    { title: <>CXO Media, Branding &<br />Thought Leadership</>, imgSrc: require('../images/Edgespark/Group 24330.png') },
+    { title: <>Innovation Lab &<br />Prototyping</>, imgSrc: require('../images/what we offer images/Group 24329.png') },
+    { title: <>CSR, Women Empowerment &<br />Social Innovation</>, imgSrc: require('../images/what we offer images/Group 24328.png') },
   ];
 
   // --- Inline CSS Styles ---
@@ -46,8 +46,8 @@ const OfferingsSection = () => {
       gap: '30px',
     },
     card: {
-      backgroundColor: '#f8f9fa',
-      borderRadius: '16px',
+      backgroundColor: '#f7f8fa',
+      borderRadius: '8px',
       overflow: 'hidden',
       boxShadow: '0 8px 25px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03)',
       transition: 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
@@ -68,12 +68,17 @@ const OfferingsSection = () => {
     cardContent: {
       padding: '24px',
       textAlign: 'center',
+      minHeight: '80px', // Ensure consistent height for 2-line titles
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     cardTitle: {
       fontSize: '18px',
-      fontWeight: '600',
+      fontWeight: '700',
       margin: 0,
       color: '#0a0f2c',
+      lineHeight: '1.4',
     },
   };
 
