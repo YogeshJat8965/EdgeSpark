@@ -156,7 +156,7 @@ function InnovationEcosystem() {
             max-height: 100px; /* Increased max height for logos */
             display: block; /* Remove extra space below image */
             object-fit: cover; /* Crop image to fill container */
-            transform: scale(1.15); /* Slight zoom to crop white space */
+            transform: scale(1.9); /* Slight zoom to crop white space */
           }
 
           .card-text-content {
@@ -228,27 +228,27 @@ function InnovationEcosystem() {
 
             .card-logo {
               width: 100%; /* Full width for mobile */
-              padding: 20px 10px; /* Reduced padding to make container more compact */
+              padding: 12px 10px; /* Further reduced padding for smaller card */
               background-color: #ffffff; /* Changed to white (section background color) */
               border-radius: 12px 12px 0 0; /* Round top corners only */
               justify-content: center;
               display: flex;
               align-items: center;
-              min-height: 150px; /* Reduced height for more compact cards */
+              min-height: 110px; /* Further reduced height for more compact cards */
               overflow: hidden; /* Clip zoomed image edges */
             }
 
             .card-logo img {
-              width: min(200px, 80vw); /* Larger image but responsive to screen width */
-              height: min(150px, 60vw); /* Larger height but responsive */
-              max-width: 80vw; /* Never exceed 80% of viewport width */
-              max-height: 60vw; /* Maintain aspect ratio */
+              width: min(180px, 75vw); /* Optimized image size */
+              height: min(130px, 55vw); /* Reduced height */
+              max-width: 75vw; /* Reduced max width */
+              max-height: 55vw; /* Reduced max height */
               object-fit: cover; /* Crop image to fill container and cut white edges */
               transform: scale(1.4); /* Zoom image to crop white space around logo */
             }
 
             .card-text-content {
-              padding: 20px; /* Add padding for text content */
+              padding: 14px 14px 50px 14px; /* Added bottom padding to prevent arrow overlap */
               background-color: #f7f8fa; /* Changed to card background color */
               border-radius: 0 0 12px 12px; /* Round bottom corners only */
               align-items: flex-start; /* Align text to start */
@@ -257,16 +257,17 @@ function InnovationEcosystem() {
 
             .card-description {
               text-align: left; /* Left align text */
-              font-size: 0.85rem; /* Slightly smaller text */
-              line-height: 1.5;
+              font-size: 0.82rem; /* Optimized font size */
+              line-height: 1.45;
               width: 100%; /* Full width for text */
+              padding-right: 10px; /* Extra padding to prevent arrow overlap */
             }
 
             .card-arrow-link {
-              bottom: 16px; /* Adjust position for mobile */
-              right: 16px;
-              width: 36px; /* Slightly smaller on mobile */
-              height: 36px;
+              bottom: 14px; /* Adjust position for mobile */
+              right: 14px;
+              width: 34px; /* Slightly smaller on mobile */
+              height: 34px;
             }
 
             .arrow-icon {
