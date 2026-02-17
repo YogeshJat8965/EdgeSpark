@@ -137,13 +137,17 @@ const FounderVoiceSection = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      width: '280px',
+      height: '280px',
     },
     image: {
-      width: 'clamp(280px, 100%, 350px)',
-      height: 'clamp(280px, 100%, 350px)',
+      width: '280px',
+      height: '280px',
       borderRadius: '50%',
       objectFit: 'cover',
+      objectPosition: 'center',
       boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+      display: 'block',
     },
   };
 
@@ -157,9 +161,13 @@ const FounderVoiceSection = () => {
       .text-container {
         max-width: 100% !important;
       }
+      .image-container {
+        width: 240px !important;
+        height: 240px !important;
+      }
       .image-container img {
-        width: clamp(250px, 80vw, 300px) !important;
-        height: clamp(250px, 80vw, 300px) !important;
+        width: 240px !important;
+        height: 240px !important;
       }
     }
   `;
@@ -170,10 +178,7 @@ const FounderVoiceSection = () => {
       <h2 style={styles.mainHeading}>Voices That Drive Vision</h2>
       <div style={styles.contentWrapper}>
         {voices.map((voice, index) => (
-          <div key={index} className="voice-item" style={{
-            ...styles.voiceItem,
-            flexDirection: index % 2 === 0 ? 'row' : 'row-reverse',
-          }}>
+          <div key={index} className="voice-item" style={styles.voiceItem}>
             <div className="text-container" style={styles.textContainer}>
               <div style={styles.quoteWrapper}>
                 <img src={require('../images/comma.png')} alt="Opening quote" style={styles.startQuote} />

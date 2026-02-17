@@ -98,25 +98,6 @@ function ForQueriesSection() {
     }
   };
 
-  // Alternative: Simple mailto approach (fallback)
-  const handleMailtoSubmit = (e) => {
-    e.preventDefault();
-    
-    const subject = `Contact Form Submission from ${formData.fullName}`;
-    const body = `
-Full Name: ${formData.fullName}
-Email: ${formData.emailAddress}
-Phone: ${formData.phoneNumber}
-Company: ${formData.companyName}
-Industry: ${formData.industry}
-Interested In: ${formData.interestedIn}
-Message: ${formData.message}
-    `;
-    
-    const mailtoLink = `mailto:yogeshjat8965@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-  };
-
   return (
     <>
       <style>

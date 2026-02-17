@@ -64,31 +64,61 @@ const AboutSection = () => {
     },
   };
 
+  const mediaQueryStyle = `
+    @media (max-width: 768px) {
+      .about-content-wrapper {
+        flex-direction: column-reverse !important;
+        gap: 40px !important;
+        padding: 0 20px !important;
+      }
+      .about-text-container,
+      .about-image-container {
+        minWidth: 100% !important;
+        width: 100% !important;
+      }
+      .about-text-container {
+        text-align: center !important;
+      }
+      .about-heading {
+        max-width: 100% !important;
+      }
+      .about-paragraph {
+        max-width: 100% !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .about-container {
+        padding: 60px 20px !important;
+      }
+    }
+  `;
+
   // --- Rendered Component ---
   return (
-    <div style={styles.container}>
-      <div style={styles.contentWrapper}>
-        <div style={styles.textContainer}>
-          <h2 style={styles.heading}>
+    <div style={styles.container} className="about-container">
+      <style>{mediaQueryStyle}</style>
+      <div style={styles.contentWrapper} className="about-content-wrapper">
+        <div style={styles.textContainer} className="about-text-container">
+          <h2 style={styles.heading} className="about-heading">
             EdgeSpark IT Ventures:<br />
             Building What's Next
           </h2>
-          <p style={styles.paragraph}>
+          <p style={styles.paragraph} className="about-paragraph">
             EdgeSpark is a future-forward venture studio powering
             businesses at the intersection of AI,<b>Technology</b> , <b>Media</b> , and
             <b>Education</b>.
           </p>
-          <p style={styles.paragraph}>
-            We don’t just keep up with innovation, we lead it. Through
+          <p style={styles.paragraph} className="about-paragraph">
+            We don't just keep up with innovation, we lead it. Through
             our specialized verticals, we deliver <b>Intelligent</b>, <b>Scalable</b>, and
             <b> Sustainable Solutions</b> that drive real-world impact.
           </p>
-          <p style={styles.paragraph}>
+          <p style={styles.paragraph} className="about-paragraph">
             <b> From automation to upskilling, we help
             enterprises evolve faster, smarter, and stronger.</b>
           </p>
         </div>
-        <div style={styles.imageContainer}>
+        <div style={styles.imageContainer} className="about-image-container">
           <img
             src={require('../images/Mask Group 1.png')}
             alt="Business Meeting Office"

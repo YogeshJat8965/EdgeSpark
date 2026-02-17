@@ -116,6 +116,51 @@ const TestimonialsSection = () => {
         right: '20px',
     }
   };
+
+  const mediaQueryStyle = `
+    @media (max-width: 768px) {
+      .testimonials-container {
+        padding: 60px 25px !important;
+      }
+      .testimonials-slider-container {
+        padding: 60px 70px !important;
+      }
+      .testimonials-heading {
+        font-size: 2rem !important;
+        margin-bottom: 40px !important;
+      }
+      .testimonials-quote {
+        font-size: 1rem !important;
+        margin-bottom: 24px !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .testimonials-slider-container {
+        padding: 50px 60px !important;
+      }
+      .testimonials-arrow-button {
+        width: 40px !important;
+        height: 40px !important;
+      }
+      .testimonials-left-arrow {
+        left: 10px !important;
+      }
+      .testimonials-right-arrow {
+        right: 10px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .testimonials-container {
+        padding: 50px 15px !important;
+      }
+      .testimonials-slider-container {
+        padding: 40px 50px !important;
+      }
+      .testimonials-heading {
+        font-size: 1.75rem !important;
+      }
+    }
+  `;
   
   // Custom component for the arrow buttons to handle hover state
   const ArrowButton = ({ direction, onClick }) => {
@@ -128,6 +173,7 @@ const TestimonialsSection = () => {
     return (
       <button 
         style={combinedStyle}
+        className={`testimonials-arrow-button ${direction === 'left' ? 'testimonials-left-arrow' : 'testimonials-right-arrow'}`}
         onClick={onClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -140,15 +186,16 @@ const TestimonialsSection = () => {
 
   // --- Rendered Component ---
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>
+    <div style={styles.container} className="testimonials-container">
+      <style>{mediaQueryStyle}</style>
+      <h2 style={styles.heading} className="testimonials-heading">
         Customer Speaks..Real Stories. <br /> Real Impact.
       </h2>
-      <div style={styles.sliderContainer}>
+      <div style={styles.sliderContainer} className="testimonials-slider-container">
         <ArrowButton direction="left" onClick={() => handleNavigation('prev')} />
 
         <div style={styles.testimonialContent}>
-          <p style={styles.quote}>"{testimonials[currentIndex].quote}"</p>
+          <p style={styles.quote} className="testimonials-quote">"{testimonials[currentIndex].quote}"</p>
           <p style={styles.author}>{testimonials[currentIndex].author}</p>
         </div>
         

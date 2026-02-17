@@ -109,13 +109,32 @@ function WhatDrivesUsSection() {
               gap: 16px;
             }
             .section-title {
-              font-size: 2.2rem;
+              font-size: 2rem;
             }
             .section-description {
               font-size: 1.05rem;
             }
             .what-drives-us-container {
-              padding: 60px 15px;
+              padding: 50px 20px;
+            }
+            .value-card {
+              padding: 28px;
+              min-height: auto;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .section-title {
+              font-size: 1.75rem;
+            }
+            .section-description {
+              font-size: 0.95rem !important;
+            }
+            .card-title {
+              font-size: 1.2rem !important;
+            }
+            .card-description {
+              font-size: 0.95rem;
             }
           }
 

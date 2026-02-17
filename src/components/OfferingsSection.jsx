@@ -82,6 +82,33 @@ const OfferingsSection = () => {
     },
   };
 
+  const mediaQueryStyle = `
+    @media (max-width: 768px) {
+      .offerings-container {
+        padding: 60px 25px !important;
+      }
+      .offerings-card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+        gap: 20px !important;
+      }
+      .offerings-heading {
+        font-size: 2rem !important;
+        margin-bottom: 40px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .offerings-container {
+        padding: 50px 20px !important;
+      }
+      .offerings-card-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .offerings-heading {
+        font-size: 1.75rem !important;
+      }
+    }
+  `;
+
   // --- Card Component ---
   const OfferingCard = ({ title, imgSrc }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -103,10 +130,11 @@ const OfferingsSection = () => {
 
   // --- Rendered Component ---
   return (
-    <div style={styles.container} id="offerings-section">
+    <div style={styles.container} id="offerings-section" className="offerings-container">
+      <style>{mediaQueryStyle}</style>
       <div style={styles.contentWrapper}>
-        <h2 style={styles.heading}>What we Offer : Tailored for Business Growth</h2>
-        <div style={styles.cardGrid}>
+        <h2 style={styles.heading} className="offerings-heading">What we Offer : Tailored for Business Growth</h2>
+        <div style={styles.cardGrid} className="offerings-card-grid">
           {offerings.map((offer, index) => (
             <OfferingCard key={index} title={offer.title} imgSrc={offer.imgSrc} />
           ))}

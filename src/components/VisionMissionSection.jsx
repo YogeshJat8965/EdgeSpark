@@ -113,22 +113,58 @@ const VisionMissionSection = () => {
     },
   };
 
+  const mediaQueryStyle = `
+    @media (max-width: 992px) {
+      .vision-container {
+        padding: 60px 30px !important;
+      }
+      .vision-content-grid {
+        flex-direction: column !important;
+        gap: 40px !important;
+      }
+      .vision-image-column,
+      .vision-text-columns-wrapper {
+        min-width: 100% !important;
+      }
+      .vision-mission-item {
+        margin-top: 0 !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .vision-container {
+        padding: 50px 20px !important;
+      }
+      .vision-heading {
+        font-size: 2rem !important;
+        margin-bottom: 40px !important;
+      }
+      .vision-text-columns-wrapper {
+        gap: 30px !important;
+      }
+      .vision-mission-item,
+      .vision-mission-item-2 {
+        min-width: 100% !important;
+      }
+    }
+  `;
+
   // --- Rendered Component ---
   return (
-    <div style={styles.container} id="vision-mission-section">
-      <h2 style={styles.heading}>
+    <div style={styles.container} id="vision-mission-section" className="vision-container">
+      <style>{mediaQueryStyle}</style>
+      <h2 style={styles.heading} className="vision-heading">
         Driven by Purpose. <br /> Fueled by Innovation..
       </h2>
-      <div style={styles.contentGrid}>
-        <div style={styles.imageColumn}>
+      <div style={styles.contentGrid} className="vision-content-grid">
+        <div style={styles.imageColumn} className="vision-image-column">
           <img
             src={require('../images/global-team-discussing-business-strategy.png')}
             alt="Mission"
             style={styles.image}
           />
         </div>
-        <div style={styles.textColumnsWrapper}>
-          <div style={styles.visionMissionItem}>
+        <div style={styles.textColumnsWrapper} className="vision-text-columns-wrapper">
+          <div style={styles.visionMissionItem} className="vision-mission-item">
             <div style={styles.itemHeader}>
               <VisionIcon />
               <h3 style={styles.itemHeading}>Our Vision</h3>
@@ -137,7 +173,7 @@ const VisionMissionSection = () => {
               To lead the next wave of global transformation by delivering AI-driven, human-centered, and sustainable solutions that redefine industries, enhance enterprise resilience, and create meaningful impact for people and the planet.
             </p>
           </div>
-          <div style={styles.missionItem}>
+          <div style={styles.missionItem} className="vision-mission-item-2">
             <div style={styles.itemHeader}>
               <MissionIcon />
               <h3 style={styles.itemHeading}>Our MISSION</h3>

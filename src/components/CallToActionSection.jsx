@@ -30,17 +30,6 @@ const CallToActionSection = () => {
     }
   };
 
-  const handleScheduleCall = () => {
-    const contactSection = document.getElementById('contact-section');
-    if (contactSection) {
-      const offsetTop = contactSection.offsetTop - 80; // 80px offset from top for better positioning
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   // --- Inline CSS Styles ---
   const styles = {
     container: {
@@ -134,7 +123,6 @@ const CallToActionSection = () => {
   };
 
   const [primaryHover, setPrimaryHover] = React.useState(false);
-  const [secondaryHover, setSecondaryHover] = React.useState(false);
 
   const primaryButtonStyle = {
     ...styles.buttonBase,
@@ -143,16 +131,39 @@ const CallToActionSection = () => {
     boxShadow: primaryHover ? '0 0 25px rgba(255, 255, 255, 0.4)' : 'none',
   };
 
-  const secondaryButtonStyle = {
-    ...styles.buttonBase,
-    ...styles.secondaryButton,
-    transform: secondaryHover ? 'scale(1.05)' : 'scale(1)',
-    backgroundColor: secondaryHover ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
-    borderColor: secondaryHover ? '#ffffff' : 'rgba(255, 255, 255, 0.6)',
-  };
-
   return (
-    <section style={styles.container}>
+    <section style={styles.container} className="cta-container">
+      <style>{`
+        @media (max-width: 768px) {
+          .cta-container {
+            padding: 80px 25px !important;
+            min-height: 400px !important;
+          }
+          .cta-button-container {
+            flex-direction: column !important;
+            gap: 15px !important;
+            width: 100% !important;
+            max-width: 300px !important;
+            margin: 0 auto !important;
+          }
+          .cta-button {
+            width: 100% !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .cta-container {
+            padding: 60px 20px !important;
+            min-height: 350px !important;
+          }
+          .cta-title {
+            font-size: 1.75rem !important;
+          }
+          .cta-description {
+            font-size: 1rem !important;
+            margin-bottom: 30px !important;
+          }
+        }
+      `}</style>
       {/* Video Background - Blue Smoke Effect */}
       <video
         autoPlay
@@ -174,17 +185,18 @@ const CallToActionSection = () => {
 
       {/* Content */}
       <div style={styles.content}>
-        <h2 style={styles.title}>
+        <h2 style={styles.title} className="cta-title">
           Let's Build the Future,<br />
 Together.
         </h2>
-        <p style={styles.description}>
+        <p style={styles.description} className="cta-description">
           Transform your business with cutting-edge Al, sustainable solutions,
 and a future-ready workforce that drives impact and innovation.
         </p>
-        <div style={styles.buttonContainer}>
+        <div style={styles.buttonContainer} className="cta-button-container">
           <button
             style={primaryButtonStyle}
+            className="cta-button"
             onMouseEnter={() => setPrimaryHover(true)}
             onMouseLeave={() => setPrimaryHover(false)}
             onClick={handleGetStarted}

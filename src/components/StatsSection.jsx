@@ -99,13 +99,41 @@ const StatsSection = () => {
     },
   };
 
+  const mediaQueryStyle = `
+    @media (max-width: 768px) {
+      .stats-container {
+        padding: 60px 30px !important;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 30px 15px !important;
+      }
+      .stat-item {
+        text-align: center !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .stats-container {
+        padding: 50px 20px !important;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+      }
+      .stats-heading {
+        margin-bottom: 40px !important;
+      }
+    }
+  `;
+
   return (
-    <div style={styles.container} ref={sectionRef}>
+    <div style={styles.container} ref={sectionRef} className="stats-container">
+      <style>{mediaQueryStyle}</style>
       <div style={styles.contentWrapper}>
-        <h2 style={styles.heading}>From Spark to Scale</h2>
-        <div style={styles.statsGrid}>
+        <h2 style={styles.heading} className="stats-heading">From Spark to Scale</h2>
+        <div style={styles.statsGrid} className="stats-grid">
           {stats.map((stat, index) => (
-            <div key={index} style={styles.statItem}>
+            <div key={index} style={styles.statItem} className="stat-item">
               <p style={styles.statNumber}>
                 <AnimatedNumber value={stat.number} duration={2200} animate={animate} />
               </p>

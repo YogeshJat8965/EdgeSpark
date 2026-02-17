@@ -147,11 +147,12 @@ const HeroSection = () => {
       marginTop: isMobile ? '20px' : '0', // Reduced from 60px to 20px to close the gap
     },
     heading: {
-      fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+      fontSize: 'clamp(1.8rem, 6vw, 4.5rem)',
       fontWeight: '600',
       lineHeight: 1.2,
       margin: '0 0 24px 0',
       color: '#f0f0f0',
+      padding: isMobile ? '0 10px' : '0',
     },
     subtextContainer: {
       marginBottom: '40px',
