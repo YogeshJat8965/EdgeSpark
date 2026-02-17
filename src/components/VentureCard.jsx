@@ -156,7 +156,7 @@ function InnovationEcosystem() {
             max-height: 100px; /* Increased max height for logos */
             display: block; /* Remove extra space below image */
             object-fit: cover; /* Crop image to fill container */
-            transform: scale(1.9); /* Slight zoom to crop white space */
+            transform: scale(1.15); /* Reduced zoom to prevent text cutoff */
           }
 
           .card-text-content {
@@ -228,27 +228,27 @@ function InnovationEcosystem() {
 
             .card-logo {
               width: 100%; /* Full width for mobile */
-              padding: 12px 10px; /* Further reduced padding for smaller card */
+              padding: 10px 8px; /* Further reduced padding for more compact card */
               background-color: #ffffff; /* Changed to white (section background color) */
               border-radius: 12px 12px 0 0; /* Round top corners only */
               justify-content: center;
               display: flex;
               align-items: center;
-              min-height: 110px; /* Further reduced height for more compact cards */
+              min-height: 100px; /* Further reduced height for more compact cards */
               overflow: hidden; /* Clip zoomed image edges */
             }
 
             .card-logo img {
-              width: min(180px, 75vw); /* Optimized image size */
-              height: min(130px, 55vw); /* Reduced height */
-              max-width: 75vw; /* Reduced max width */
-              max-height: 55vw; /* Reduced max height */
+              width: min(170px, 72vw); /* Further reduced image size */
+              height: min(120px, 52vw); /* Further reduced height */
+              max-width: 72vw; /* Further reduced max width */
+              max-height: 52vw; /* Further reduced max height */
               object-fit: cover; /* Crop image to fill container and cut white edges */
               transform: scale(1.4); /* Zoom image to crop white space around logo */
             }
 
             .card-text-content {
-              padding: 14px 14px 50px 14px; /* Added bottom padding to prevent arrow overlap */
+              padding: 12px 12px 46px 12px; /* Reduced padding for more compact card */
               background-color: #f7f8fa; /* Changed to card background color */
               border-radius: 0 0 12px 12px; /* Round bottom corners only */
               align-items: flex-start; /* Align text to start */

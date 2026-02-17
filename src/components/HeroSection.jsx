@@ -82,7 +82,7 @@ const HeroSection = () => {
   // --- Inline CSS Styles ---
   const styles = {
     container: {
-      minHeight: '100vh',
+      minHeight: isMobile ? '85vh' : '100vh', // Reduced height on mobile for more compact layout
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -203,7 +203,7 @@ const HeroSection = () => {
     },
     scrollIndicator: {
       position: 'absolute',
-      bottom: isMobile ? '60px' : '30px', // Move up on mobile for better visibility
+      bottom: isMobile ? '100px' : '30px', // Moved higher on mobile for better positioning
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
