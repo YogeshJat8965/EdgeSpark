@@ -150,18 +150,18 @@ const HeroSection = () => {
       fontSize: 'clamp(1.8rem, 6vw, 4.5rem)',
       fontWeight: '600',
       lineHeight: 1.2,
-      margin: '0 0 24px 0',
+      margin: '0 0 18px 0',
       color: '#f0f0f0',
       padding: isMobile ? '0 10px' : '0',
     },
     subtextContainer: {
-      marginBottom: '40px',
+      marginBottom: '30px',
     },
     tags: {
       fontSize: isMobile ? '16px' : '18px', // Slightly smaller on mobile
       fontWeight: '400',
       opacity: 0.9,
-      marginBottom: '10px',
+      marginBottom: '8px',
       letterSpacing: '0.5px',
     },
     tagline: {

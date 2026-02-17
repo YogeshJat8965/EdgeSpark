@@ -18,6 +18,7 @@ const AboutSection = () => {
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       color: '#212529', // A dark color for text
       boxSizing: 'border-box',
+      overflow: 'hidden',
     },
     contentWrapper: {
       display: 'flex',
@@ -35,10 +36,12 @@ const AboutSection = () => {
     },
     imageContainer: {
       flex: 1.2,
-      minWidth: '350px', // Ensures image container doesn't get too squished
+      minWidth: '280px',
+      maxWidth: '100%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      overflow: 'hidden',
     },
     heading: {
       fontSize: 'clamp(1.75rem, 4.5vw, 2.5rem)',
@@ -57,10 +60,12 @@ const AboutSection = () => {
     },
     image: {
       width: '100%',
+      maxWidth: '100%',
       height: 'auto',
       borderRadius: '12px',
       boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
       objectFit: 'cover',
+      display: 'block',
     },
   };
 
@@ -69,15 +74,20 @@ const AboutSection = () => {
       .about-content-wrapper {
         flex-direction: column-reverse !important;
         gap: 40px !important;
-        padding: 0 20px !important;
+        padding: 0 !important;
       }
       .about-text-container,
       .about-image-container {
-        minWidth: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
         width: 100% !important;
       }
       .about-text-container {
         text-align: center !important;
+        padding: 0 20px !important;
+      }
+      .about-image-container {
+        padding: 0 20px !important;
       }
       .about-heading {
         max-width: 100% !important;
@@ -85,10 +95,18 @@ const AboutSection = () => {
       .about-paragraph {
         max-width: 100% !important;
       }
+      .about-image {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
     }
     @media (max-width: 480px) {
       .about-container {
-        padding: 60px 20px !important;
+        padding: 60px 15px !important;
+      }
+      .about-text-container,
+      .about-image-container {
+        padding: 0 !important;
       }
     }
   `;
@@ -123,6 +141,7 @@ const AboutSection = () => {
             src={require('../images/Mask Group 1.png')}
             alt="Business Meeting Office"
             style={styles.image}
+            className="about-image"
           />
         </div>
       </div>

@@ -147,6 +147,7 @@ function InnovationEcosystem() {
             display: flex;
             align-items: center; /* Center logo vertically */
             justify-content: center; /* Center logo horizontally */
+            overflow: hidden; /* Clip zoomed image edges */
           }
 
           .card-logo img {
@@ -154,7 +155,8 @@ function InnovationEcosystem() {
             height: 150px; /* Maintain aspect ratio */
             max-height: 100px; /* Increased max height for logos */
             display: block; /* Remove extra space below image */
-            object-fit: contain; /* Maintain aspect ratio */
+            object-fit: cover; /* Crop image to fill container */
+            transform: scale(1.15); /* Slight zoom to crop white space */
           }
 
           .card-text-content {
@@ -226,13 +228,14 @@ function InnovationEcosystem() {
 
             .card-logo {
               width: 100%; /* Full width for mobile */
-              padding: 40px 20px; /* More padding for larger image area */
+              padding: 20px 10px; /* Reduced padding to make container more compact */
               background-color: #ffffff; /* Changed to white (section background color) */
               border-radius: 12px 12px 0 0; /* Round top corners only */
               justify-content: center;
               display: flex;
               align-items: center;
-              min-height: 180px; /* Minimum height for image section */
+              min-height: 150px; /* Reduced height for more compact cards */
+              overflow: hidden; /* Clip zoomed image edges */
             }
 
             .card-logo img {
@@ -240,7 +243,8 @@ function InnovationEcosystem() {
               height: min(150px, 60vw); /* Larger height but responsive */
               max-width: 80vw; /* Never exceed 80% of viewport width */
               max-height: 60vw; /* Maintain aspect ratio */
-              object-fit: contain; /* Maintain aspect ratio without distortion */
+              object-fit: cover; /* Crop image to fill container and cut white edges */
+              transform: scale(1.4); /* Zoom image to crop white space around logo */
             }
 
             .card-text-content {
