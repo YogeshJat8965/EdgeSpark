@@ -8,7 +8,6 @@ const OfferingsSection = () => {
   const [visibleCards, setVisibleCards] = useState([]);
   const [scrollProgress, setScrollProgress] = useState({});
   const cardRefs = useRef([]);
-  const sectionRef = useRef(null);
 
   useEffect(() => {
     const observers = cardRefs.current.map((ref, index) => {
@@ -34,9 +33,10 @@ const OfferingsSection = () => {
     });
 
     return () => {
+      const currentRefs = cardRefs.current;
       observers.forEach((observer, index) => {
-        if (cardRefs.current[index]) {
-          observer.unobserve(cardRefs.current[index]);
+        if (currentRefs[index]) {
+          observer.unobserve(currentRefs[index]);
         }
       });
     };
