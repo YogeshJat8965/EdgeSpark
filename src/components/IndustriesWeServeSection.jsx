@@ -102,14 +102,14 @@ const IndustryCard = ({ icon, title, index, isVisible }) => {
 
 function IndustriesWeServeSection() {
   const [visibleCards, setVisibleCards] = useState([]);
-  const [headerVisible, setHeaderVisible] = useState(false);
   const cardRefs = useRef([]);
   const headerRef = useRef(null);
 
   useEffect(() => {
+    const currentHeader = headerRef.current;
     const headerObserver = new IntersectionObserver(
       ([entry]) => {
-        setHeaderVisible(entry.isIntersecting);
+        // Header visibility tracking can be added here if needed
       },
       {
         threshold: 0.2,
@@ -117,19 +117,20 @@ function IndustriesWeServeSection() {
       }
     );
 
-    if (headerRef.current) {
-      headerObserver.observe(headerRef.current);
+    if (currentHeader) {
+      headerObserver.observe(currentHeader);
     }
 
     return () => {
-      if (headerRef.current) {
-        headerObserver.unobserve(headerRef.current);
+      if (currentHeader) {
+        headerObserver.unobserve(currentHeader);
       }
     };
   }, []);
 
   useEffect(() => {
-    const observers = cardRefs.current.map((ref, index) => {
+    const currentRefs = cardRefs.current;
+    const observers = currentRefs.map((ref, index) => {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
@@ -153,8 +154,8 @@ function IndustriesWeServeSection() {
 
     return () => {
       observers.forEach((observer, index) => {
-        if (cardRefs.current[index]) {
-          observer.unobserve(cardRefs.current[index]);
+        if (currentRefs[index]) {
+          observer.unobserve(currentRefs[index]);
         }
       });
     };
