@@ -8,11 +8,20 @@ const HeroSection = () => {
   // --- Parallax state ---
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
-  // Scroll tracking for parallax
+  // Scroll tracking for parallax and scroll indicator visibility
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      
+      // Hide scroll indicator after user scrolls down
+      if (currentScrollY > 100) {
+        setShowScrollIndicator(false);
+      } else {
+        setShowScrollIndicator(true);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -147,11 +156,13 @@ const HeroSection = () => {
     },
     header: {
       position: 'absolute',
-      top: isMobile ? '20px' : '40px', // Closer to top on mobile (reduced from 30px to 20px)
-      left: isMobile ? '50%' : '50px', // Center on mobile, left on desktop
-      transform: isMobile ? 'translateX(-50%)' : 'none', // Center transform on mobile
-      textAlign: isMobile ? 'center' : 'left', // Center text on mobile
+      top: isMobile ? '20px' : '40px',
+      left: isMobile ? '50%' : '50px',
+      transform: isMobile ? 'translateX(-50%)' : 'none',
+      textAlign: isMobile ? 'center' : 'left',
       zIndex: 20,
+      opacity: 0,
+      animation: 'fadeInUp 0.8s ease-out 0.2s forwards',
     },
     logoMain: {
       fontSize: isMobile ? '34px' : '44px', // Slightly smaller on mobile
@@ -175,6 +186,8 @@ const HeroSection = () => {
       marginTop: isMobile ? '-115px' : '0',
       transform: `translate3d(${mousePosition.x * -20}px, ${scrollY * 0.3 + mousePosition.y * -20}px, 0)`,
       willChange: 'transform',
+      opacity: 0,
+      animation: 'fadeInUp 1s ease-out 0.4s forwards',
     },
     heading: {
       fontSize: 'clamp(1.8rem, 6vw, 4.5rem)',
@@ -183,9 +196,13 @@ const HeroSection = () => {
       margin: '0 0 18px 0',
       color: '#f0f0f0',
       padding: isMobile ? '0 10px' : '0',
+      opacity: 0,
+      animation: 'fadeInUp 1s ease-out 0.6s forwards',
     },
     subtextContainer: {
       marginBottom: '30px',
+      opacity: 0,
+      animation: 'fadeInUp 1s ease-out 0.8s forwards',
     },
     tags: {
       fontSize: isMobile ? '16px' : '18px', // Slightly smaller on mobile
@@ -201,11 +218,13 @@ const HeroSection = () => {
     },
     buttonContainer: {
       display: 'flex',
-      flexDirection: isMobile ? 'column' : 'row', // Stack buttons vertically on mobile
+      flexDirection: isMobile ? 'column' : 'row',
       justifyContent: 'center',
-      gap: isMobile ? '15px' : '20px', // Smaller gap on mobile
-      width: isMobile ? '100%' : 'auto', // Full width on mobile
-      maxWidth: isMobile ? '300px' : 'none', // Max width on mobile
+      gap: isMobile ? '15px' : '20px',
+      width: isMobile ? '100%' : 'auto',
+      maxWidth: isMobile ? '300px' : 'none',
+      opacity: 0,
+      animation: 'fadeInUp 1s ease-out 1s forwards',
     },
     buttonBase: {
       padding: isMobile ? '12px 24px' : '14px 28px', // Smaller padding on mobile
@@ -234,16 +253,18 @@ const HeroSection = () => {
     },
     scrollIndicator: {
       position: 'absolute',
-      bottom: isMobile ? '100px' : '30px', // Moved higher on mobile for better positioning
+      bottom: isMobile ? '100px' : '30px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       gap: '8px',
       color: '#ffffff',
-      opacity: 0.7,
+      opacity: showScrollIndicator ? 0.8 : 0,
       cursor: 'pointer',
-      transition: 'opacity 0.3s ease, transform 0.2s ease',
+      transition: 'opacity 0.6s ease, transform 0.3s ease',
       zIndex: 20,
+      animation: 'bounceUpDown 2s ease-in-out infinite',
+      pointerEvents: showScrollIndicator ? 'auto' : 'none',
     },
     scrollText: {
       fontSize: '12px',
@@ -280,12 +301,73 @@ const HeroSection = () => {
 
   const scrollIndicatorStyle = {
     ...styles.scrollIndicator,
-    opacity: scrollHover ? 1 : 0.7,
-    transform: scrollHover ? 'translateY(-3px)' : 'translateY(0)',
+    opacity: showScrollIndicator ? (scrollHover ? 1 : 0.8) : 0,
+    transform: scrollHover ? 'translateY(-5px) scale(1.05)' : 'translateY(0)',
   };
+
+  // Add global smooth scroll styles
+  const globalStyles = `
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    @keyframes bounceUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% {
+        opacity: 0.8;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      }
+      50% {
+        opacity: 1;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+      }
+    }
+    
+    /* Smooth scroll for all elements */
+    * {
+      scroll-behavior: smooth;
+    }
+    
+    /* Enhance focus states for accessibility */
+    *:focus-visible {
+      outline: 2px solid rgba(99, 102, 241, 0.6);
+      outline-offset: 2px;
+    }
+  `;
 
   return (
     <div style={styles.container}>
+      <style>{globalStyles}</style>
       {/* Video Background - Blue Smoke Effect */}
       <video
         autoPlay

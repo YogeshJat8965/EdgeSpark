@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 /**
  * A component to feature quotes from key people, like CEO or founder.
@@ -6,6 +6,11 @@ import React from 'react';
  * Displays all voices vertically without carousel functionality.
  */
 const FounderVoiceSection = () => {
+  const [visibleCards, setVisibleCards] = useState([]);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const sectionRef = useRef(null);
+  const cardRefs = useRef([]);
+  const headingRef = useRef(null);
 
   // --- Content Data ---
   const voices = [
@@ -23,12 +28,58 @@ const FounderVoiceSection = () => {
     }
   ];
 
+  // Intersection Observer for each voice card
+  useEffect(() => {
+    const observers = cardRefs.current.map((ref, index) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleCards((prev) => {
+                if (!prev.includes(index)) {
+                  return [...prev, index];
+                }
+                return prev;
+              });
+            } else {
+              setVisibleCards((prev) => prev.filter((i) => i !== index));
+            }
+          });
+        },
+        { threshold: 0.25, rootMargin: '-40px' }
+      );
+
+      if (ref) observer.observe(ref);
+      return observer;
+    });
+
+    return () => observers.forEach((observer) => observer.disconnect());
+  }, []);
+
+  // Scroll progress for parallax
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const progress = Math.max(
+        0,
+        Math.min(1, (windowHeight - rect.top) / (windowHeight + rect.height))
+      );
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // --- Inline CSS Styles ---
   const styles = {
     container: {
       width: '100%',
       padding: '60px 40px 100px 40px',
-      backgroundColor: '#f8f9fa',
+      backgroundColor: '#f0f4ff',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       color: '#0a0f2c',
       boxSizing: 'border-box',
@@ -39,6 +90,11 @@ const FounderVoiceSection = () => {
       lineHeight: 1.2,
       marginBottom: '50px',
       textAlign: 'center',
+      opacity: visibleCards.length > 0 ? 1 : 0,
+      transform: visibleCards.length > 0 
+        ? 'translate3d(0, 0, 0) scale(1)' 
+        : 'translate3d(0, 50px, 0) scale(0.9)',
+      transition: 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
     },
     contentWrapper: {
       maxWidth: '1200px',
@@ -54,6 +110,8 @@ const FounderVoiceSection = () => {
       justifyContent: 'center',
       gap: '60px',
       width: '100%',
+      perspective: '2000px',
+      transformStyle: 'preserve-3d',
     },
     textContainer: {
       flex: '1 1 auto',
@@ -140,6 +198,7 @@ const FounderVoiceSection = () => {
       alignItems: 'center',
       width: '280px',
       height: '280px',
+      position: 'relative',
     },
     image: {
       width: '280px',
@@ -149,6 +208,7 @@ const FounderVoiceSection = () => {
       objectPosition: 'center',
       boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
       display: 'block',
+      transition: 'transform 0.4s ease-out, box-shadow 0.4s ease-out',
     },
   };
 
@@ -174,13 +234,40 @@ const FounderVoiceSection = () => {
   `;
 
   return (
-    <div style={styles.container} id="founder-voice-section">
+    <div ref={sectionRef} style={styles.container} id="founder-voice-section">
       <style>{mediaQueryStyle}</style>
-      <h2 style={styles.mainHeading}>Voices That Drive Vision</h2>
+      <h2 ref={headingRef} style={styles.mainHeading}>Voices That Drive Vision</h2>
       <div style={styles.contentWrapper}>
-        {voices.map((voice, index) => (
-          <div key={index} className="voice-item" style={styles.voiceItem}>
-            <div className="text-container" style={styles.textContainer}>
+        {voices.map((voice, index) => {
+          const isVisible = visibleCards.includes(index);
+          const delay = index * 0.2;
+          
+          // Calculate parallax effect based on scroll progress
+          const parallaxY = scrollProgress * (index % 2 === 0 ? 15 : -15);
+          
+          return (
+            <div 
+              key={index} 
+              ref={(el) => (cardRefs.current[index] = el)}
+              className="voice-item" 
+              style={{
+                ...styles.voiceItem,
+                opacity: isVisible ? 1 : 0,
+                transform: `translate3d(0, ${parallaxY}px, 0)`,
+                transition: `opacity 1s ease-out ${delay}s, transform 0.3s ease-out`,
+              }}
+            >
+              <div 
+                className="text-container" 
+                style={{
+                  ...styles.textContainer,
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible 
+                    ? 'translate3d(0, 0, 0) rotateY(0deg)' 
+                    : 'translate3d(-80px, 30px, -60px) rotateY(-10deg)',
+                  transition: `all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay + 0.2}s`,
+                }}
+              >
               <div style={styles.quoteWrapper}>
                 <img src={require('../images/comma.png')} alt="Opening quote" style={styles.startQuote} />
                 <img src={require('../images/comma.png')} alt="Opening quote 2" style={styles.startQuote2} />
@@ -195,11 +282,31 @@ const FounderVoiceSection = () => {
                 <p style={styles.authorTitle}>{voice.authorTitle}</p>
               </div>
             </div>
-            <div className="image-container" style={styles.imageContainer}>
-              <img src={voice.image} alt={voice.authorName} style={styles.image} />
+            <div 
+              className="image-container" 
+              style={{
+                ...styles.imageContainer,
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible 
+                  ? 'translate3d(0, 0, 0) rotateY(0deg) scale(1)' 
+                  : 'translate3d(80px, 30px, -60px) rotateY(10deg) scale(0.85)',
+                transition: `all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay + 0.4}s`,
+              }}
+            >
+              <img 
+                src={voice.image} 
+                alt={voice.authorName} 
+                style={{
+                  ...styles.image,
+                  transform: isVisible 
+                    ? `scale(${1 + scrollProgress * 0.03})` 
+                    : 'scale(0.85)',
+                }} 
+              />
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function ForQueriesSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [visibleCards, setVisibleCards] = useState([]);
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const contactCardsRef = useRef([]);
+  const formRef = useRef(null);
+
   const [formData, setFormData] = useState({
     fullName: '',
     emailAddress: '',
@@ -13,6 +20,52 @@ function ForQueriesSection() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+
+  // Intersection Observer for entrance animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.15, rootMargin: '-30px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Observer for contact cards
+  useEffect(() => {
+    const observers = contactCardsRef.current.map((ref, index) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleCards((prev) => {
+                if (!prev.includes(index)) {
+                  return [...prev, index];
+                }
+                return prev;
+              });
+            } else {
+              setVisibleCards((prev) => prev.filter((i) => i !== index));
+            }
+          });
+        },
+        { threshold: 0.3, rootMargin: '-20px' }
+      );
+
+      if (ref) observer.observe(ref);
+      return observer;
+    });
+
+    return () => observers.forEach((observer) => observer.disconnect());
+  }, []);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -123,12 +176,34 @@ function ForQueriesSection() {
             color: #1a202c; /* Dark text */
             margin-bottom: 8px;
             line-height: 1.2;
+            transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+          }
+
+          .queries-header.visible h2 {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+          }
+
+          .queries-header:not(.visible) h2 {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0) scale(0.95);
           }
 
           .queries-header p {
             font-size: 1.1rem; /* Description font size */
             color: #4a5568; /* Grey text */
             line-height: 1.6;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+          }
+
+          .queries-header.visible p {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          .queries-header:not(.visible) p {
+            opacity: 0;
+            transform: translateY(20px);
           }
 
           .queries-content-grid {
@@ -137,6 +212,8 @@ function ForQueriesSection() {
             gap: 40px; /* Space between the two main columns */
             max-width: 1200px;
             margin: 0 auto;
+            perspective: 1500px;
+            transform-style: preserve-3d;
           }
 
           /* --- Left Column: Contact Info --- */
@@ -154,6 +231,19 @@ function ForQueriesSection() {
             align-items: center; /* Vertically center icon and text */
             gap: 20px; /* Space between icon and text */
             min-height: 100px; /* Ensure consistent height */
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          }
+
+          .contact-card.visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+          }
+
+          .contact-card:not(.visible) {
+            opacity: 0;
+            transform: translate3d(-60px, 30px, -50px) rotateY(-8deg) scale(0.9);
           }
 
           .contact-icon {
@@ -187,6 +277,18 @@ function ForQueriesSection() {
             border-radius: 8px;
             padding: 36px; /* Padding inside the form card */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow for the form card */
+            transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+          }
+
+          .get-call-back-form-card.visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+          }
+
+          .get-call-back-form-card:not(.visible) {
+            opacity: 0;
+            transform: translate3d(60px, 30px, -50px) rotateY(8deg) scale(0.95);
           }
 
           .get-call-back-form-card h3 {
@@ -386,8 +488,8 @@ function ForQueriesSection() {
         `}
       </style>
 
-      <div className="for-queries-container" id="contact-section">
-        <div className="queries-header">
+      <div ref={sectionRef} className="for-queries-container" id="contact-section">
+        <div ref={headerRef} className={`queries-header ${isVisible ? 'visible' : ''}`}>
           <h2>For Queries</h2>
           <p>Contact us if you have any queries.</p>
         </div>
@@ -395,7 +497,13 @@ function ForQueriesSection() {
         <div className="queries-content-grid">
           {/* Left Column: Contact Information */}
           <div className="contact-info-column">
-            <div className="contact-card">
+            <div 
+              ref={(el) => (contactCardsRef.current[0] = el)}
+              className={`contact-card ${visibleCards.includes(0) ? 'visible' : ''}`}
+              style={{
+                transitionDelay: '0.1s'
+              }}
+            >
               <div className="contact-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -407,7 +515,13 @@ function ForQueriesSection() {
               </div>
             </div>
 
-            <div className="contact-card">
+            <div 
+              ref={(el) => (contactCardsRef.current[1] = el)}
+              className={`contact-card ${visibleCards.includes(1) ? 'visible' : ''}`}
+              style={{
+                transitionDelay: '0.25s'
+              }}
+            >
               <div className="contact-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -421,7 +535,10 @@ function ForQueriesSection() {
           </div>
 
           {/* Right Column: Get a Call Back Form */}
-          <div className="get-call-back-form-card">
+          <div 
+            ref={formRef}
+            className={`get-call-back-form-card ${isVisible ? 'visible' : ''}`}
+          >
             <h3>Get a Call Back</h3>
             <form className="form-grid" onSubmit={handleSubmit}>
               <div className="form-group full-width">

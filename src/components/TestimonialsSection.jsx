@@ -1,10 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 /**
  * A testimonial slider component that cycles through customer stories.
  * All styles are inline and the component is fully self-contained.
  */
 const TestimonialsSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+  const sliderRef = useRef(null);
+
+  // Intersection Observer for entrance animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.2, rootMargin: '-50px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Scroll progress tracking for parallax
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const progress = Math.max(
+        0,
+        Math.min(1, (windowHeight - rect.top) / (windowHeight + rect.height))
+      );
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // --- Demo Content for the Slider ---
   const testimonials = [
@@ -52,10 +93,13 @@ const TestimonialsSection = () => {
     container: {
       width: '100%',
       padding: '80px 40px',
-      backgroundColor: '#ffffff',
+      backgroundColor: '#f8f9fa',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       color: '#0a0f2c',
       boxSizing: 'border-box',
+      position: 'relative',
+      overflow: 'hidden',
+      transform: `translate3d(0, ${scrollProgress * -20}px, 0)`,
     },
     heading: {
       fontSize: 'clamp(2.2rem, 5vw, 3rem)',
@@ -63,18 +107,31 @@ const TestimonialsSection = () => {
       lineHeight: 1.25,
       textAlign: 'center',
       marginBottom: '60px',
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible ? 'translate3d(0, 0, 0) scale(1)' : 'translate3d(0, 40px, 0) scale(0.95)',
+      transition: 'all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1)',
     },
     sliderContainer: {
-      maxWidth: '900px', // Increased from 900px
+      maxWidth: '900px',
       margin: '0 auto',
-      padding: '80px 100px', // Increased padding
+      padding: '80px 100px',
       backgroundColor: '#eff1fc',
       borderRadius: '16px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       position: 'relative',
-      minHeight: '150px', // Added minimum height for better proportion
+      minHeight: '150px',
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible 
+        ? 'translate3d(0, 0, 0) scale(1) rotateX(0deg)' 
+        : 'translate3d(0, 60px, -100px) scale(0.92) rotateX(8deg)',
+      transition: 'all 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s',
+      boxShadow: isVisible 
+        ? '0 20px 60px rgba(0, 0, 0, 0.12)' 
+        : '0 10px 30px rgba(0, 0, 0, 0.05)',
+      perspective: '1500px',
+      transformStyle: 'preserve-3d',
     },
     testimonialContent: {
       textAlign: 'center',
@@ -186,12 +243,12 @@ const TestimonialsSection = () => {
 
   // --- Rendered Component ---
   return (
-    <div style={styles.container} className="testimonials-container">
+    <div ref={sectionRef} style={styles.container} className="testimonials-container">
       <style>{mediaQueryStyle}</style>
-      <h2 style={styles.heading} className="testimonials-heading">
+      <h2 ref={headingRef} style={styles.heading} className="testimonials-heading">
         Customer Speaks..Real Stories. <br /> Real Impact.
       </h2>
-      <div style={styles.sliderContainer} className="testimonials-slider-container">
+      <div ref={sliderRef} style={styles.sliderContainer} className="testimonials-slider-container">
         <ArrowButton direction="left" onClick={() => handleNavigation('prev')} />
 
         <div style={styles.testimonialContent}>
