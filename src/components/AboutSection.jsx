@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 /**
  * An "About" section component with a two-column layout.
@@ -6,6 +6,30 @@ import React from 'react';
  * The image is a placeholder, which you can replace with your own asset.
  */
 const AboutSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  // IntersectionObserver for scroll-triggered animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.2, rootMargin: '-50px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   // --- Inline CSS Styles ---
   const styles = {
@@ -14,11 +38,12 @@ const AboutSection = () => {
       display: 'flex',
       justifyContent: 'center',
       padding: '80px 40px',
-      backgroundColor: '#ffffff', // White background
+      backgroundColor: '#ffffff',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      color: '#212529', // A dark color for text
+      color: '#212529',
       boxSizing: 'border-box',
       overflow: 'hidden',
+      perspective: '1500px',
     },
     contentWrapper: {
       display: 'flex',
@@ -27,12 +52,21 @@ const AboutSection = () => {
       gap: '60px',
       maxWidth: '1200px',
       width: '100%',
-      flexWrap: 'wrap', // Allows columns to stack on smaller screens
+      flexWrap: 'wrap',
+      transformStyle: 'preserve-3d',
     },
     textContainer: {
       flex: 1,
-      minWidth: '300px', // Ensures text container doesn't get too squished
+      minWidth: '300px',
       textAlign: 'left',
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible 
+        ? 'translate3d(0, 0, 0) rotateY(0deg) scale(1)' 
+        : 'translate3d(-120px, 0, -80px) rotateY(-8deg) scale(0.95)',
+      transition: 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      transitionDelay: '0.2s',
+      willChange: 'transform, opacity',
+      transformStyle: 'preserve-3d',
     },
     imageContainer: {
       flex: 1.2,
@@ -42,6 +76,14 @@ const AboutSection = () => {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible 
+        ? 'translate3d(0, 0, 0) rotateY(0deg) scale(1)' 
+        : 'translate3d(120px, 0, -80px) rotateY(8deg) scale(0.95)',
+      transition: 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      transitionDelay: '0.4s',
+      willChange: 'transform, opacity',
+      transformStyle: 'preserve-3d',
     },
     heading: {
       fontSize: 'clamp(1.75rem, 4.5vw, 2.5rem)',
@@ -63,9 +105,13 @@ const AboutSection = () => {
       maxWidth: '100%',
       height: 'auto',
       borderRadius: '12px',
-      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+      boxShadow: isVisible 
+        ? '0 20px 40px rgba(0, 0, 0, 0.15)' 
+        : '0 10px 25px rgba(0, 0, 0, 0.1)',
       objectFit: 'cover',
       display: 'block',
+      transform: isVisible ? 'scale(1)' : 'scale(0.98)',
+      transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s',
     },
   };
 
@@ -113,7 +159,7 @@ const AboutSection = () => {
 
   // --- Rendered Component ---
   return (
-    <div style={styles.container} className="about-container">
+    <div style={styles.container} className="about-container" ref={sectionRef}>
       <style>{mediaQueryStyle}</style>
       <div style={styles.contentWrapper} className="about-content-wrapper">
         <div style={styles.textContainer} className="about-text-container">

@@ -27,7 +27,7 @@ const FounderVoiceSection = () => {
   const styles = {
     container: {
       width: '100%',
-      padding: '100px 40px',
+      padding: '60px 40px 100px 40px',
       backgroundColor: '#f8f9fa',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       color: '#0a0f2c',
@@ -37,7 +37,7 @@ const FounderVoiceSection = () => {
       fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
       fontWeight: '600',
       lineHeight: 1.2,
-      marginBottom: '80px',
+      marginBottom: '50px',
       textAlign: 'center',
     },
     contentWrapper: {
@@ -51,6 +51,7 @@ const FounderVoiceSection = () => {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'center',
       gap: '60px',
       width: '100%',
     },

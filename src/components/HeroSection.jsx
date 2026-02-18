@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
  * A full-screen hero section component with video background.
  * All styles are inline for easy integration.
  */
 const HeroSection = () => {
+  // --- Parallax state ---
+  const [scrollY, setScrollY] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Scroll tracking for parallax
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Mouse tracking for parallax
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Normalize mouse position to -1 to 1 range
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // --- SVG Icons (as functional components for cleanliness) ---
 
@@ -107,6 +133,8 @@ const HeroSection = () => {
       zIndex: 1,
       opacity: videoLoaded ? 1 : 0,
       transition: 'opacity 1s ease-in-out',
+      transform: `scale(${1 + scrollY * 0.0003}) translate3d(${mousePosition.x * 10}px, ${scrollY * 0.5 + mousePosition.y * 10}px, 0)`,
+      willChange: 'transform',
     },
     overlay: {
       position: 'absolute',
@@ -144,7 +172,9 @@ const HeroSection = () => {
       alignItems: 'center',
       maxWidth: '1000px',
       zIndex: 20,
-      marginTop: isMobile ? '-115px' : '0', // Further reduced to minimize gap on mobile
+      marginTop: isMobile ? '-115px' : '0',
+      transform: `translate3d(${mousePosition.x * -20}px, ${scrollY * 0.3 + mousePosition.y * -20}px, 0)`,
+      willChange: 'transform',
     },
     heading: {
       fontSize: 'clamp(1.8rem, 6vw, 4.5rem)',
@@ -191,6 +221,7 @@ const HeroSection = () => {
       border: '1.5px solid transparent',
       transition: 'transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease',
       width: isMobile ? '100%' : 'auto', // Full width buttons on mobile
+      minWidth: isMobile ? 'auto' : '230px', // Fixed minimum width on desktop for equal sizing
     },
     primaryButton: {
       backgroundColor: '#ffffff',

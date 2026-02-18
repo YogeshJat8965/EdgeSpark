@@ -175,10 +175,54 @@ const Footer = () => {
         <div style={styles.column}>
           <h3 style={styles.heading}>Ventures</h3>
           <ul style={styles.linkList}>
-            <li style={styles.linkItem}>AI LifeBOT</li>
-            <li style={styles.linkItem}>Appsolutely.ai</li>
-            <li style={styles.linkItem}>CXO TechBOT</li>
-            <li style={styles.linkItem}>Skillzza</li>
+            <li style={styles.linkItem}>
+              <a 
+                href="https://www.ailifebot.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{textDecoration: 'none', color: 'inherit'}}
+                onMouseOver={(e) => e.currentTarget.style.color = '#0a0f2c'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#4a5568'}
+              >
+                AI LifeBOT
+              </a>
+            </li>
+            <li style={styles.linkItem}>
+              <a 
+                href="https://appsolutely.ai/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{textDecoration: 'none', color: 'inherit'}}
+                onMouseOver={(e) => e.currentTarget.style.color = '#0a0f2c'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#4a5568'}
+              >
+                Appsolutely.ai
+              </a>
+            </li>
+            <li style={styles.linkItem}>
+              <a 
+                href="https://cxotechbot.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{textDecoration: 'none', color: 'inherit'}}
+                onMouseOver={(e) => e.currentTarget.style.color = '#0a0f2c'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#4a5568'}
+              >
+                CXO TechBOT
+              </a>
+            </li>
+            <li style={styles.linkItem}>
+              <a 
+                href="https://skillzza.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{textDecoration: 'none', color: 'inherit'}}
+                onMouseOver={(e) => e.currentTarget.style.color = '#0a0f2c'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#4a5568'}
+              >
+                Skillzza
+              </a>
+            </li>
           </ul>
         </div>
 
