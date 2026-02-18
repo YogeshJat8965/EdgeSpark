@@ -15,6 +15,7 @@ const VisionMissionSection = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    const currentSection = sectionRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -25,12 +26,11 @@ const VisionMissionSection = () => {
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentSection) {
+      observer.observe(currentSection);
     }
 
     return () => {
-      const currentSection = sectionRef.current;
       if (currentSection) {
         observer.unobserve(currentSection);
       }
