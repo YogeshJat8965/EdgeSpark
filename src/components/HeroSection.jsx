@@ -117,7 +117,7 @@ const HeroSection = () => {
   // --- Inline CSS Styles ---
   const styles = {
     container: {
-      minHeight: isMobile ? '85vh' : '100vh', // Reduced height on mobile for more compact layout
+      minHeight: isMobile ? '100vh' : '100vh', // Full height on all devices
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -126,7 +126,7 @@ const HeroSection = () => {
       position: 'relative',
       color: '#ffffff',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      padding: '2rem',
+      padding: isMobile ? '1rem' : '2rem',
       boxSizing: 'border-box',
       overflow: 'hidden',
       // Fallback background
@@ -157,90 +157,94 @@ const HeroSection = () => {
     header: {
       position: 'absolute',
       top: isMobile ? '20px' : '40px',
-      left: isMobile ? '50%' : '50px',
-      transform: isMobile ? 'translateX(-50%)' : 'none',
-      textAlign: isMobile ? 'center' : 'left',
+      left: isMobile ? '20px' : '50px',
+      transform: 'none',
+      textAlign: 'left',
       zIndex: 20,
       opacity: 0,
       animation: 'fadeInUp 0.8s ease-out 0.2s forwards',
     },
     logoMain: {
-      fontSize: isMobile ? '34px' : '44px', // Slightly smaller on mobile
+      fontSize: isMobile ? '28px' : '44px', // Better mobile sizing
       fontWeight: '600',
       margin: 0,
+      lineHeight: 1.2,
     },
     logoSub: {
-      fontSize: isMobile ? '14px' : '18px', // Slightly smaller on mobile
+      fontSize: isMobile ? '12px' : '18px', // Better mobile sizing
       fontWeight: '300',
       opacity: 0.8,
       margin: 0,
-      marginTop: '2px',
+      marginTop: '4px',
     },
     mainContent: {
       textAlign: 'center',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      maxWidth: '1000px',
+      maxWidth: isMobile ? '100%' : '1000px',
       zIndex: 20,
-      marginTop: isMobile ? '-115px' : '0',
+      marginTop: isMobile ? '20px' : '0',
+      padding: isMobile ? '0 15px' : '0',
       transform: `translate3d(${mousePosition.x * -20}px, ${scrollY * 0.3 + mousePosition.y * -20}px, 0)`,
       willChange: 'transform',
       opacity: 0,
       animation: 'fadeInUp 1s ease-out 0.4s forwards',
     },
     heading: {
-      fontSize: 'clamp(1.8rem, 6vw, 4.5rem)',
+      fontSize: isMobile ? '2rem' : 'clamp(1.8rem, 6vw, 4.5rem)',
       fontWeight: '600',
-      lineHeight: 1.2,
-      margin: '0 0 18px 0',
+      lineHeight: 1.25,
+      margin: '0 0 20px 0',
       color: '#f0f0f0',
-      padding: isMobile ? '0 10px' : '0',
+      padding: '0',
       opacity: 0,
       animation: 'fadeInUp 1s ease-out 0.6s forwards',
     },
     subtextContainer: {
-      marginBottom: '30px',
+      marginBottom: isMobile ? '35px' : '30px',
       opacity: 0,
       animation: 'fadeInUp 1s ease-out 0.8s forwards',
     },
     tags: {
-      fontSize: isMobile ? '16px' : '18px', // Slightly smaller on mobile
+      fontSize: isMobile ? '15px' : '18px',
       fontWeight: '400',
       opacity: 0.9,
-      marginBottom: '8px',
+      marginBottom: '10px',
       letterSpacing: '0.5px',
+      lineHeight: 1.5,
     },
     tagline: {
-      fontSize: isMobile ? '14px' : '16px', // Slightly smaller on mobile
+      fontSize: isMobile ? '13px' : '16px',
       fontWeight: '300',
-      opacity: 0.7,
+      opacity: 0.75,
+      lineHeight: 1.5,
     },
     buttonContainer: {
       display: 'flex',
       flexDirection: isMobile ? 'column' : 'row',
       justifyContent: 'center',
-      gap: isMobile ? '15px' : '20px',
+      gap: isMobile ? '12px' : '20px',
       width: isMobile ? '100%' : 'auto',
-      maxWidth: isMobile ? '300px' : 'none',
+      maxWidth: isMobile ? '320px' : 'none',
       opacity: 0,
       animation: 'fadeInUp 1s ease-out 1s forwards',
     },
     buttonBase: {
-      padding: isMobile ? '12px 24px' : '14px 28px', // Smaller padding on mobile
+      padding: isMobile ? '14px 24px' : '14px 28px',
       borderRadius: '8px',
       cursor: 'pointer',
-      fontSize: isMobile ? '15px' : '16px', // Smaller font on mobile
+      fontSize: isMobile ? '14px' : '16px',
       fontWeight: '500',
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: '10px',
+      gap: '8px',
       textDecoration: 'none',
       border: '1.5px solid transparent',
       transition: 'transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease',
-      width: isMobile ? '100%' : 'auto', // Full width buttons on mobile
-      minWidth: isMobile ? 'auto' : '230px', // Fixed minimum width on desktop for equal sizing
+      width: isMobile ? '100%' : 'auto',
+      minWidth: isMobile ? 'auto' : '230px',
     },
     primaryButton: {
       backgroundColor: '#ffffff',
@@ -253,7 +257,7 @@ const HeroSection = () => {
     },
     scrollIndicator: {
       position: 'absolute',
-      bottom: isMobile ? '100px' : '30px',
+      bottom: isMobile ? '20px' : '30px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -267,7 +271,7 @@ const HeroSection = () => {
       pointerEvents: showScrollIndicator ? 'auto' : 'none',
     },
     scrollText: {
-      fontSize: '12px',
+      fontSize: isMobile ? '11px' : '12px',
       fontWeight: '300',
     },
   };
