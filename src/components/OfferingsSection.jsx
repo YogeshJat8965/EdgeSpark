@@ -10,7 +10,8 @@ const OfferingsSection = () => {
   const cardRefs = useRef([]);
 
   useEffect(() => {
-    const observers = cardRefs.current.map((ref, index) => {
+    const currentRefs = cardRefs.current;
+    const observers = currentRefs.map((ref, index) => {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
@@ -33,7 +34,6 @@ const OfferingsSection = () => {
     });
 
     return () => {
-      const currentRefs = cardRefs.current;
       observers.forEach((observer, index) => {
         if (currentRefs[index]) {
           observer.unobserve(currentRefs[index]);
