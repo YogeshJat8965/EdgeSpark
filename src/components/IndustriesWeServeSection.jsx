@@ -242,6 +242,9 @@ function IndustriesWeServeSection() {
               grid-template-columns: repeat(3, 1fr);
               gap: 20px;
             }
+            .last-row .card-wrapper {
+              flex: 0 0 calc((100% - 60px) / 3);
+            }
           }
 
           @media (max-width: 868px) {
@@ -249,20 +252,110 @@ function IndustriesWeServeSection() {
               grid-template-columns: repeat(2, 1fr);
               gap: 16px;
             }
+            .last-row {
+              gap: 16px;
+            }
+            .last-row .card-wrapper {
+              flex: 0 0 calc((100% - 16px) / 2);
+            }
             .section-title {
               font-size: 2rem;
             }
             .section-description {
-              font-size: 0.95rem;
+              font-size: 1.1rem !important;
             }
             .industries-container {
-              padding: 60px 15px;
+              padding: 60px 20px;
+            }
+            .industry-card {
+              padding: 20px;
+            }
+          }
+
+          @media (max-width: 640px) {
+            .section-title {
+              font-size: 1.75rem;
+            }
+            .section-description {
+              font-size: 1rem !important;
+              padding: 0 10px;
+            }
+            .industries-container {
+              padding: 50px 15px;
+            }
+            .section-header {
+              margin-bottom: 40px;
             }
           }
 
           @media (max-width: 540px) {
             .industries-grid {
               grid-template-columns: 1fr;
+              gap: 14px;
+              max-width: 420px;
+              margin: 0 auto;
+            }
+            .last-row {
+              display: grid;
+              grid-template-columns: 1fr;
+              gap: 14px;
+            }
+            .last-row .card-wrapper {
+              flex: unset;
+              width: 100%;
+            }
+            .industry-card {
+              padding: 18px 16px;
+              min-height: 110px;
+              border-radius: 10px;
+            }
+            .card-icon {
+              width: 40px;
+              height: 40px;
+              margin-bottom: 10px;
+            }
+            .card-icon img {
+              width: 40px !important;
+              height: 40px !important;
+            }
+            .card-title {
+              font-size: 0.9rem;
+              line-height: 1.4;
+            }
+          }
+
+          @media (max-width: 400px) {
+            .industries-container {
+              padding: 40px 16px;
+            }
+            .section-title {
+              font-size: 1.5rem;
+            }
+            .section-description {
+              font-size: 0.9rem !important;
+            }
+            .industries-grid {
+              max-width: 100%;
+              gap: 12px;
+            }
+            .last-row {
+              gap: 12px;
+            }
+            .industry-card {
+              padding: 16px 14px;
+              min-height: 100px;
+            }
+            .card-icon {
+              width: 36px;
+              height: 36px;
+              margin-bottom: 8px;
+            }
+            .card-icon img {
+              width: 36px !important;
+              height: 36px !important;
+            }
+            .card-title {
+              font-size: 0.85rem;
             }
           }
 

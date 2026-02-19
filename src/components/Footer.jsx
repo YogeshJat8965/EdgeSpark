@@ -235,8 +235,7 @@ const Footer = () => {
           <h3 style={styles.heading}>Corporate Office</h3>
           <p style={styles.addressText}>
             WeWork India, Chromium, Cts No. 106/1-5,<br />
-            Jogeshwari-Vikhroli Link Road,<br />
-            Milind Nagar,<br />
+            Jogeshwari-Vikhroli Link Road, Milind Nagar,<br />
             Powai, Mumbai - 400076
           </p>
           <div style={styles.presencesContainer}>
