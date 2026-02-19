@@ -76,6 +76,9 @@ const FounderVoiceSection = () => {
 
   const mediaQueryStyle = `
     @media (max-width: 768px) {
+      .fv-section-container {
+        padding: 50px 24px 70px 24px !important;
+      }
       .fv-voice-item {
         flex-direction: column !important;
         text-align: center !important;
@@ -83,24 +86,100 @@ const FounderVoiceSection = () => {
       }
       .fv-text-container {
         max-width: 100% !important;
+        padding: 0 10px !important;
+      }
+      .fv-quote-wrapper {
+        padding: 10px 16px !important;
+      }
+      .fv-quote-text {
+        font-size: 1rem !important;
+        line-height: 1.7 !important;
       }
       .fv-image-container {
-        width: 220px !important;
-        height: 220px !important;
+        width: 200px !important;
+        height: 200px !important;
       }
       .fv-image-container img {
-        width: 220px !important;
-        height: 220px !important;
+        width: 200px !important;
+        height: 200px !important;
+      }
+      .fv-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+        left: 10px !important;
+      }
+      .fv-nav-btn.next {
+        right: 10px !important;
+        left: auto !important;
+      }
+      .fv-author-name {
+        font-size: 1rem !important;
+      }
+      .fv-author-title {
+        font-size: 0.9rem !important;
+      }
+      .fv-comma {
+        width: 20px !important;
+        height: 20px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .fv-section-container {
+        padding: 40px 16px 60px 16px !important;
+      }
+      .fv-heading {
+        font-size: 2rem !important;
+        margin-bottom: 35px !important;
+      }
+      .fv-voice-item {
+        gap: 24px !important;
+      }
+      .fv-text-container {
+        padding: 0 5px !important;
+      }
+      .fv-quote-wrapper {
+        padding: 8px 12px !important;
+      }
+      .fv-quote-text {
+        font-size: 0.95rem !important;
+        line-height: 1.65 !important;
+      }
+      .fv-image-container {
+        width: 180px !important;
+        height: 180px !important;
+      }
+      .fv-image-container img {
+        width: 180px !important;
+        height: 180px !important;
       }
       .fv-nav-btn {
         width: 40px !important;
         height: 40px !important;
+        left: 5px !important;
+        font-size: 18px !important;
+      }
+      .fv-nav-btn.next {
+        right: 5px !important;
+      }
+      .fv-author-name {
+        font-size: 0.95rem !important;
+      }
+      .fv-author-title {
+        font-size: 0.85rem !important;
+      }
+      .fv-comma {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .fv-dots-container {
+        margin-top: 30px !important;
       }
     }
   `;
 
   return (
-    <div ref={sectionRef} style={{
+    <div ref={sectionRef} className="fv-section-container" style={{
       width: '100%',
       padding: '60px 40px 100px 40px',
       backgroundColor: '#f6f8fa',
@@ -112,7 +191,7 @@ const FounderVoiceSection = () => {
       <style>{mediaQueryStyle}</style>
 
       {/* Heading */}
-      <h2 style={{
+      <h2 className="fv-heading" style={{
         fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
         fontWeight: '600',
         lineHeight: 1.2,
@@ -156,18 +235,18 @@ const FounderVoiceSection = () => {
               transition: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s',
             }}
           >
-            <div style={{ position: 'relative', padding: '10px 20px' }}>
-              <img src={require('../images/comma.png')} alt="" style={{
+            <div className="fv-quote-wrapper" style={{ position: 'relative', padding: '10px 20px' }}>
+              <img className="fv-comma" src={require('../images/comma.png')} alt="" style={{
                 position: 'absolute', bottom: '-10px', right: '-20px',
                 width: '25px', height: '25px', opacity: 0.6,
                 filter: 'brightness(0) invert(40%)',
               }} />
-              <img src={require('../images/comma.png')} alt="" style={{
+              <img className="fv-comma" src={require('../images/comma.png')} alt="" style={{
                 position: 'absolute', bottom: '-10px', right: '-5px',
                 width: '25px', height: '25px', opacity: 0.6,
                 filter: 'brightness(0) invert(40%)',
               }} />
-              <p style={{
+              <p className="fv-quote-text" style={{
                 fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
                 lineHeight: 1.8,
                 color: '#333d5a',
@@ -175,20 +254,20 @@ const FounderVoiceSection = () => {
                 position: 'relative',
                 zIndex: 1,
               }}>{voice.quote}</p>
-              <img src={require('../images/comma.png')} alt="" style={{
+              <img className="fv-comma" src={require('../images/comma.png')} alt="" style={{
                 position: 'absolute', top: '-10px', left: '-20px',
                 width: '25px', height: '25px', transform: 'rotate(180deg)',
                 opacity: 0.6, filter: 'brightness(0) invert(40%)',
               }} />
-              <img src={require('../images/comma.png')} alt="" style={{
+              <img className="fv-comma" src={require('../images/comma.png')} alt="" style={{
                 position: 'absolute', top: '-10px', left: '-5px',
                 width: '25px', height: '25px', transform: 'rotate(180deg)',
                 opacity: 0.6, filter: 'brightness(0) invert(40%)',
               }} />
             </div>
             <div style={{ marginTop: '24px', paddingLeft: '20px' }}>
-              <p style={{ fontWeight: '700', fontSize: '1.1rem', margin: '0 0 4px 0', color: '#000' }}>{voice.authorName}</p>
-              <p style={{ fontSize: '1rem', color: '#000', margin: 0, fontWeight: '700' }}>{voice.authorTitle}</p>
+              <p className="fv-author-name" style={{ fontWeight: '700', fontSize: '1.1rem', margin: '0 0 4px 0', color: '#000' }}>{voice.authorName}</p>
+              <p className="fv-author-title" style={{ fontSize: '1rem', color: '#000', margin: 0, fontWeight: '700' }}>{voice.authorTitle}</p>
             </div>
           </div>
 
@@ -254,7 +333,7 @@ const FounderVoiceSection = () => {
         >&#8592;</button>
 
         <button
-          className="fv-nav-btn"
+          className="fv-nav-btn next"
           onClick={() => handleNav('next')}
           style={{
             position: 'absolute',
@@ -281,7 +360,7 @@ const FounderVoiceSection = () => {
         >&#8594;</button>
 
         {/* Dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '40px' }}>
+        <div className="fv-dots-container" style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '40px' }}>
           {voices.map((_, index) => (
             <button
               key={index}
