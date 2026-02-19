@@ -208,10 +208,6 @@ const OfferingsSection = () => {
         : `all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`,
     };
     
-    // Parallax effect on image
-    const progress = scrollProgress || 0;
-    const imageTransform = `translateY(${progress * -15}px) scale(${1 + progress * 0.05})`;
-    
     const imageStyle = {
       ...styles.cardImage,
       transform: isHovered ? 'scale(1.03)' : 'scale(1)',
