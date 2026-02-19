@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
- * A component to feature quotes from key people, like CEO or founder.
+ * A carousel component to feature quotes from key people, like CEO or founder.
  * All styles are inline and the component is self-contained.
- * Displays all voices vertically without carousel functionality.
  */
 const FounderVoiceSection = () => {
-  const [visibleCards, setVisibleCards] = useState([]);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState('next');
   const sectionRef = useRef(null);
-  const cardRefs = useRef([]);
-  const headingRef = useRef(null);
+  const autoPlayRef = useRef(null);
 
   // --- Content Data ---
   const voices = [
@@ -28,285 +28,286 @@ const FounderVoiceSection = () => {
     }
   ];
 
-  // Intersection Observer for each voice card
+  // Intersection Observer
   useEffect(() => {
-    const observers = cardRefs.current.map((ref, index) => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setVisibleCards((prev) => {
-                if (!prev.includes(index)) {
-                  return [...prev, index];
-                }
-                return prev;
-              });
-            } else {
-              setVisibleCards((prev) => prev.filter((i) => i !== index));
-            }
-          });
-        },
-        { threshold: 0.25, rootMargin: '-40px' }
-      );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.2, rootMargin: '-40px' }
+    );
 
-      if (ref) observer.observe(ref);
-      return observer;
-    });
-
-    return () => observers.forEach((observer) => observer.disconnect());
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
-  // Scroll progress for parallax
+  // Navigation
+  const goTo = useCallback((direction) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setSlideDirection(direction);
+    setTimeout(() => {
+      if (direction === 'next') {
+        setCurrentIndex((prev) => (prev + 1) % voices.length);
+      } else {
+        setCurrentIndex((prev) => (prev - 1 + voices.length) % voices.length);
+      }
+      setTimeout(() => setIsAnimating(false), 600);
+    }, 400);
+  }, [isAnimating, voices.length]);
+
+  // Auto-play
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const progress = Math.max(
-        0,
-        Math.min(1, (windowHeight - rect.top) / (windowHeight + rect.height))
-      );
-      setScrollProgress(progress);
-    };
+    autoPlayRef.current = setInterval(() => {
+      goTo('next');
+    }, 5000);
+    return () => clearInterval(autoPlayRef.current);
+  }, [goTo]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // --- Inline CSS Styles ---
-  const styles = {
-    container: {
-      width: '100%',
-      padding: '60px 40px 100px 40px',
-      backgroundColor: '#f0f4ff',
-      fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      color: '#0a0f2c',
-      boxSizing: 'border-box',
-    },
-    mainHeading: {
-      fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
-      fontWeight: '600',
-      lineHeight: 1.2,
-      marginBottom: '50px',
-      textAlign: 'center',
-      opacity: visibleCards.length > 0 ? 1 : 0,
-      transform: visibleCards.length > 0 
-        ? 'translate3d(0, 0, 0) scale(1)' 
-        : 'translate3d(0, 50px, 0) scale(0.9)',
-      transition: 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    },
-    contentWrapper: {
-      maxWidth: '1200px',
-      margin: '0 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '80px',
-    },
-    voiceItem: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '60px',
-      width: '100%',
-      perspective: '2000px',
-      transformStyle: 'preserve-3d',
-    },
-    textContainer: {
-      flex: '1 1 auto',
-      maxWidth: '600px',
-      position: 'relative',
-    },
-    quoteWrapper: {
-      position: 'relative',
-      paddingLeft: '20px',
-      paddingRight: '20px',
-      paddingTop: '10px',
-      paddingBottom: '10px',
-    },
-    quoteText: {
-      fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
-      lineHeight: 1.8,
-      color: '#333d5a',
-      position: 'relative',
-      zIndex: 1,
-      fontStyle: 'italic',
-    },
-    authorContainer: {
-      marginTop: '24px',
-      paddingLeft: '20px',
-    },
-    authorName: {
-      fontWeight: '700',
-      fontSize: '1.1rem',
-      margin: '0 0 4px 0',
-      color: '#000000',
-    },
-    authorTitle: {
-      fontSize: '1rem',
-      color: '#000000',
-      margin: 0,
-      fontWeight: '700',
-    },
-    startQuote: {
-      position: 'absolute',
-      bottom: '-10px',
-      right: '-20px',
-      width: '25px',
-      height: '25px',
-      zIndex: 0,
-      opacity: 0.6,
-      filter: 'brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(40%) contrast(100%)',
-    },
-    startQuote2: {
-      position: 'absolute',
-      bottom: '-10px',
-      right: '-5px',
-      width: '25px',
-      height: '25px',
-      zIndex: 0,
-      opacity: 0.6,
-      filter: 'brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(40%) contrast(100%)',
-    },
-    endQuote: {
-      position: 'absolute',
-      top: '-10px',
-      left: '-20px',
-      width: '25px',
-      height: '25px',
-      transform: 'rotate(180deg)',
-      zIndex: 0,
-      opacity: 0.6,
-      filter: 'brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(40%) contrast(100%)',
-    },
-    endQuote2: {
-      position: 'absolute',
-      top: '-10px',
-      left: '-5px',
-      width: '25px',
-      height: '25px',
-      transform: 'rotate(180deg)',
-      zIndex: 0,
-      opacity: 0.6,
-      filter: 'brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(40%) contrast(100%)',
-    },
-    imageContainer: {
-      flex: '0 0 auto',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '280px',
-      height: '280px',
-      position: 'relative',
-    },
-    image: {
-      width: '280px',
-      height: '280px',
-      borderRadius: '50%',
-      objectFit: 'cover',
-      objectPosition: 'center',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-      display: 'block',
-      transition: 'transform 0.4s ease-out, box-shadow 0.4s ease-out',
-    },
+  const handleNav = (direction) => {
+    clearInterval(autoPlayRef.current);
+    goTo(direction);
+    autoPlayRef.current = setInterval(() => {
+      goTo('next');
+    }, 5000);
   };
 
-  // --- CSS Media Query for mobile responsiveness ---
+  const voice = voices[currentIndex];
+
   const mediaQueryStyle = `
     @media (max-width: 768px) {
-      .voice-item {
+      .fv-voice-item {
         flex-direction: column !important;
         text-align: center !important;
+        gap: 30px !important;
       }
-      .text-container {
+      .fv-text-container {
         max-width: 100% !important;
       }
-      .image-container {
-        width: 240px !important;
-        height: 240px !important;
+      .fv-image-container {
+        width: 220px !important;
+        height: 220px !important;
       }
-      .image-container img {
-        width: 240px !important;
-        height: 240px !important;
+      .fv-image-container img {
+        width: 220px !important;
+        height: 220px !important;
+      }
+      .fv-nav-btn {
+        width: 40px !important;
+        height: 40px !important;
       }
     }
   `;
 
   return (
-    <div ref={sectionRef} style={styles.container} id="founder-voice-section">
+    <div ref={sectionRef} style={{
+      width: '100%',
+      padding: '60px 40px 100px 40px',
+      backgroundColor: '#f6f8fa',
+      fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      color: '#0a0f2c',
+      boxSizing: 'border-box',
+      overflow: 'hidden',
+    }} id="founder-voice-section">
       <style>{mediaQueryStyle}</style>
-      <h2 ref={headingRef} style={styles.mainHeading}>Voices That Drive Vision</h2>
-      <div style={styles.contentWrapper}>
-        {voices.map((voice, index) => {
-          const isVisible = visibleCards.includes(index);
-          const delay = index * 0.2;
-          
-          // Calculate parallax effect based on scroll progress
-          const parallaxY = scrollProgress * (index % 2 === 0 ? 15 : -15);
-          
-          return (
-            <div 
-              key={index} 
-              ref={(el) => (cardRefs.current[index] = el)}
-              className="voice-item" 
-              style={{
-                ...styles.voiceItem,
-                opacity: isVisible ? 1 : 0,
-                transform: `translate3d(0, ${parallaxY}px, 0)`,
-                transition: `opacity 1s ease-out ${delay}s, transform 0.3s ease-out`,
-              }}
-            >
-              <div 
-                className="text-container" 
-                style={{
-                  ...styles.textContainer,
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible 
-                    ? 'translate3d(0, 0, 0) rotateY(0deg)' 
-                    : 'translate3d(-80px, 30px, -60px) rotateY(-10deg)',
-                  transition: `all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay + 0.2}s`,
-                }}
-              >
-              <div style={styles.quoteWrapper}>
-                <img src={require('../images/comma.png')} alt="Opening quote" style={styles.startQuote} />
-                <img src={require('../images/comma.png')} alt="Opening quote 2" style={styles.startQuote2} />
-                <p style={styles.quoteText}>
-                  {voice.quote}
-                </p>
-                <img src={require('../images/comma.png')} alt="Closing quote" style={styles.endQuote} />
-                <img src={require('../images/comma.png')} alt="Closing quote 2" style={styles.endQuote2} />
-              </div>
-              <div style={styles.authorContainer}>
-                <p style={styles.authorName}>{voice.authorName}</p>
-                <p style={styles.authorTitle}>{voice.authorTitle}</p>
-              </div>
+
+      {/* Heading */}
+      <h2 style={{
+        fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
+        fontWeight: '600',
+        lineHeight: 1.2,
+        marginBottom: '50px',
+        textAlign: 'center',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(50px) scale(0.9)',
+        transition: 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      }}>Voices That Drive Vision</h2>
+
+      {/* Carousel */}
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
+        <div
+          className="fv-voice-item"
+          key={currentIndex}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '60px',
+            width: '100%',
+            opacity: isAnimating ? 0 : 1,
+            transform: isAnimating
+              ? `translateX(${slideDirection === 'next' ? '-60px' : '60px'})`
+              : 'translateX(0)',
+            transition: 'opacity 0.5s ease, transform 0.5s ease',
+          }}
+        >
+          {/* Text */}
+          <div
+            className="fv-text-container"
+            style={{
+              flex: '1 1 auto',
+              maxWidth: '600px',
+              position: 'relative',
+              opacity: isVisible && !isAnimating ? 1 : 0,
+              transform: isVisible && !isAnimating
+                ? 'translate3d(0, 0, 0)'
+                : 'translate3d(-40px, 20px, 0)',
+              transition: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s',
+            }}
+          >
+            <div style={{ position: 'relative', padding: '10px 20px' }}>
+              <img src={require('../images/comma.png')} alt="" style={{
+                position: 'absolute', bottom: '-10px', right: '-20px',
+                width: '25px', height: '25px', opacity: 0.6,
+                filter: 'brightness(0) invert(40%)',
+              }} />
+              <img src={require('../images/comma.png')} alt="" style={{
+                position: 'absolute', bottom: '-10px', right: '-5px',
+                width: '25px', height: '25px', opacity: 0.6,
+                filter: 'brightness(0) invert(40%)',
+              }} />
+              <p style={{
+                fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
+                lineHeight: 1.8,
+                color: '#333d5a',
+                fontStyle: 'italic',
+                position: 'relative',
+                zIndex: 1,
+              }}>{voice.quote}</p>
+              <img src={require('../images/comma.png')} alt="" style={{
+                position: 'absolute', top: '-10px', left: '-20px',
+                width: '25px', height: '25px', transform: 'rotate(180deg)',
+                opacity: 0.6, filter: 'brightness(0) invert(40%)',
+              }} />
+              <img src={require('../images/comma.png')} alt="" style={{
+                position: 'absolute', top: '-10px', left: '-5px',
+                width: '25px', height: '25px', transform: 'rotate(180deg)',
+                opacity: 0.6, filter: 'brightness(0) invert(40%)',
+              }} />
             </div>
-            <div 
-              className="image-container" 
-              style={{
-                ...styles.imageContainer,
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible 
-                  ? 'translate3d(0, 0, 0) rotateY(0deg) scale(1)' 
-                  : 'translate3d(80px, 30px, -60px) rotateY(10deg) scale(0.85)',
-                transition: `all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay + 0.4}s`,
-              }}
-            >
-              <img 
-                src={voice.image} 
-                alt={voice.authorName} 
-                style={{
-                  ...styles.image,
-                  transform: isVisible 
-                    ? `scale(${1 + scrollProgress * 0.03})` 
-                    : 'scale(0.85)',
-                }} 
-              />
+            <div style={{ marginTop: '24px', paddingLeft: '20px' }}>
+              <p style={{ fontWeight: '700', fontSize: '1.1rem', margin: '0 0 4px 0', color: '#000' }}>{voice.authorName}</p>
+              <p style={{ fontSize: '1rem', color: '#000', margin: 0, fontWeight: '700' }}>{voice.authorTitle}</p>
             </div>
           </div>
-          );
-        })}
+
+          {/* Image */}
+          <div
+            className="fv-image-container"
+            style={{
+              flex: '0 0 auto',
+              width: '280px',
+              height: '280px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              opacity: isVisible && !isAnimating ? 1 : 0,
+              transform: isVisible && !isAnimating
+                ? 'translate3d(0, 0, 0) scale(1)'
+                : 'translate3d(40px, 20px, 0) scale(0.85)',
+              transition: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s',
+            }}
+          >
+            <img
+              src={voice.image}
+              alt={voice.authorName}
+              style={{
+                width: '280px',
+                height: '280px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                display: 'block',
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <button
+          className="fv-nav-btn"
+          onClick={() => handleNav('prev')}
+          style={{
+            position: 'absolute',
+            left: '-20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            border: 'none',
+            backgroundColor: '#0a0f2c',
+            color: '#fff',
+            fontSize: '20px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.3s ease',
+            zIndex: 10,
+            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+          }}
+          onMouseEnter={(e) => { e.target.style.backgroundColor = '#2e3092'; e.target.style.transform = 'translateY(-50%) scale(1.1)'; }}
+          onMouseLeave={(e) => { e.target.style.backgroundColor = '#0a0f2c'; e.target.style.transform = 'translateY(-50%) scale(1)'; }}
+        >&#8592;</button>
+
+        <button
+          className="fv-nav-btn"
+          onClick={() => handleNav('next')}
+          style={{
+            position: 'absolute',
+            right: '-20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            border: 'none',
+            backgroundColor: '#0a0f2c',
+            color: '#fff',
+            fontSize: '20px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.3s ease',
+            zIndex: 10,
+            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+          }}
+          onMouseEnter={(e) => { e.target.style.backgroundColor = '#2e3092'; e.target.style.transform = 'translateY(-50%) scale(1.1)'; }}
+          onMouseLeave={(e) => { e.target.style.backgroundColor = '#0a0f2c'; e.target.style.transform = 'translateY(-50%) scale(1)'; }}
+        >&#8594;</button>
+
+        {/* Dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '40px' }}>
+          {voices.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (index === currentIndex || isAnimating) return;
+                clearInterval(autoPlayRef.current);
+                setSlideDirection(index > currentIndex ? 'next' : 'prev');
+                setIsAnimating(true);
+                setTimeout(() => {
+                  setCurrentIndex(index);
+                  setTimeout(() => setIsAnimating(false), 600);
+                }, 400);
+                autoPlayRef.current = setInterval(() => goTo('next'), 5000);
+              }}
+              style={{
+                width: currentIndex === index ? '32px' : '10px',
+                height: '10px',
+                borderRadius: '5px',
+                border: 'none',
+                backgroundColor: currentIndex === index ? '#0a0f2c' : '#c0c5d0',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

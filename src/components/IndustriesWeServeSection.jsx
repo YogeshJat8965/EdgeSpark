@@ -225,6 +225,18 @@ function IndustriesWeServeSection() {
             height: 100%;
           }
 
+          .last-row {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+          }
+
+          .last-row .card-wrapper {
+            flex: 0 0 calc((100% - 72px) / 4);
+            min-width: 0;
+          }
+
           @media (max-width: 1200px) {
             .industries-grid {
               grid-template-columns: repeat(3, 1fr);
@@ -396,7 +408,7 @@ function IndustriesWeServeSection() {
           }
 
           .industry-card:hover .card-icon img {
-            filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+            filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%) !important;
           }
 
           /* Icon animation on scroll into view */
@@ -480,7 +492,7 @@ function IndustriesWeServeSection() {
         </div>
 
         <div className="industries-grid">
-          {industries.map((industry, index) => (
+          {industries.slice(0, 8).map((industry, index) => (
             <div 
               key={index}
               ref={(el) => (cardRefs.current[index] = el)}
@@ -494,6 +506,22 @@ function IndustriesWeServeSection() {
               />
             </div>
           ))}
+          <div className="last-row">
+            {industries.slice(8).map((industry, index) => (
+              <div 
+                key={index + 8}
+                ref={(el) => (cardRefs.current[index + 8] = el)}
+                className="card-wrapper"
+              >
+                <IndustryCard
+                  icon={industry.icon}
+                  title={industry.title}
+                  index={index + 8}
+                  isVisible={visibleCards.includes(index + 8)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

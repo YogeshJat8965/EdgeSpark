@@ -110,7 +110,7 @@ const OfferingsSection = () => {
       boxShadow: '0 8px 25px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03)',
       transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       cursor: 'pointer',
-      border: '1px solid rgba(255, 255, 255, 0.2)',
+      border: 'none',
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -118,19 +118,16 @@ const OfferingsSection = () => {
     cardHover: {
       transform: 'translateY(-8px)',
       boxShadow: '0 20px 40px rgba(0, 0, 0, 0.12), 0 10px 20px rgba(59, 130, 246, 0.08)',
-      borderColor: 'rgba(59, 130, 246, 0.3)',
     },
     imageContainer: {
       position: 'relative',
       width: '100%',
-      height: '200px',
       overflow: 'hidden',
       backgroundColor: '#e5e7eb',
     },
     cardImage: {
       width: '100%',
-      height: '200px',
-      objectFit: 'cover',
+      height: 'auto',
       display: 'block',
     },
     cardContent: {
@@ -217,7 +214,7 @@ const OfferingsSection = () => {
     
     const imageStyle = {
       ...styles.cardImage,
-      transform: isHovered ? 'scale(1.08)' : imageTransform,
+      transform: isHovered ? 'scale(1.03)' : 'scale(1)',
       transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     };
     

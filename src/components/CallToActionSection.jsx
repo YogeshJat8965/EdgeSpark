@@ -46,6 +46,9 @@ const CallToActionSection = () => {
       justifyContent: 'center',
       // Fallback background
       background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%), #0f172a',
+      maxWidth: '1200px',
+      margin: '0 auto',
+      borderRadius: '16px',
     },
     videoBackground: {
       position: 'absolute',
@@ -132,7 +135,8 @@ const CallToActionSection = () => {
   };
 
   return (
-    <section style={styles.container} className="cta-container">
+    <div style={{ backgroundColor: '#ffffff', padding: '60px 20px' }}>
+      <section style={styles.container} className="cta-container">
       <style>{`
         @media (max-width: 768px) {
           .cta-container {
@@ -190,8 +194,8 @@ const CallToActionSection = () => {
 Together.
         </h2>
         <p style={styles.description} className="cta-description">
-          Transform your business with cutting-edge Al, sustainable solutions,
-and a future-ready workforce that drives impact and innovation.
+          Transform your business with cutting-edge Al, Sustainable solutions,
+and a future-ready workforce that drives impact and Innovation.
         </p>
         <div style={styles.buttonContainer} className="cta-button-container">
           <button
@@ -221,6 +225,7 @@ and a future-ready workforce that drives impact and innovation.
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

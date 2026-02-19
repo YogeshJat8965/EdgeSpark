@@ -55,6 +55,7 @@ const Footer = () => {
       lineHeight: 1.7,
       marginBottom: '18px',
       color: '#4a5568',
+      fontWeight: '600',
     },
     column: {
       gridColumn: 'span 1',
@@ -76,6 +77,7 @@ const Footer = () => {
       cursor: 'pointer',
       transition: 'color 0.2s ease',
       color: '#4a5568',
+      fontWeight: '600',
     },
     linkItemHover: {
       color: '#0a0f2c',
@@ -84,6 +86,7 @@ const Footer = () => {
         fontSize: '0.9rem',
         lineHeight: 1.7,
         color: '#4a5568',
+        fontWeight: '600',
     },
     presencesContainer: {
         marginTop: '32px'
@@ -92,6 +95,7 @@ const Footer = () => {
         fontSize: '0.9rem',
         lineHeight: 1.7,
         color: '#4a5568',
+        fontWeight: '600',
     }
   };
 
@@ -230,8 +234,9 @@ const Footer = () => {
         <div style={styles.column}>
           <h3 style={styles.heading}>Corporate Office</h3>
           <p style={styles.addressText}>
-            WeWork India, Chromium, Cts No. 106/1-5,
-            Jogeshwari-Vikhroli Link Road, Milind Nagar,
+            WeWork India, Chromium, Cts No. 106/1-5,<br />
+            Jogeshwari-Vikhroli Link Road,<br />
+            Milind Nagar,<br />
             Powai, Mumbai - 400076
           </p>
           <div style={styles.presencesContainer}>

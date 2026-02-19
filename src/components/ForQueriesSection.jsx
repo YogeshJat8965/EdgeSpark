@@ -160,7 +160,7 @@ function ForQueriesSection() {
 
           .for-queries-container {
             font-family: 'Inter', sans-serif;
-            background-color: #fcfdff; /* Very light background, almost white */
+            background-color: #ffffff; /* White background */
             padding: 80px 20px;
           }
 
@@ -273,7 +273,7 @@ function ForQueriesSection() {
 
           /* --- Right Column: Get a Call Back Form --- */
           .get-call-back-form-card {
-            background-color: #ffffff; /* White background for the form card */
+            background-color: #f7f9fc; /* Light background for the form card */
             border-radius: 8px;
             padding: 36px; /* Padding inside the form card */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow for the form card */
@@ -348,7 +348,7 @@ function ForQueriesSection() {
           .form-group input:invalid,
           .form-group select:invalid,
           .form-group textarea:invalid {
-            border-color: #fed7d7; /* Light red border for invalid fields */
+            border-color: #e5e7eb; /* Same as default border */
           }
           
           .form-group input:focus,
@@ -376,9 +376,10 @@ function ForQueriesSection() {
           .submit-button {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             padding: 12px 24px;
-            background-color: #4338ca; /* Indigo button background */
+            background-color: #0000ff; /* Bright blue button background */
             border: none;
             border-radius: 6px;
             color: #ffffff;
@@ -387,12 +388,14 @@ function ForQueriesSection() {
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             margin-top: 20px; /* Space above button */
+            width: auto;
+            max-width: 150px;
           }
 
           .submit-button:hover {
-            background-color: #4f46e5; /* Lighter indigo on hover */
+            background-color: #0000cc; /* Slightly darker blue on hover */
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(67, 56, 202, 0.4);
+            box-shadow: 0 6px 12px rgba(0, 0, 255, 0.4);
           }
 
           .submit-button:disabled {

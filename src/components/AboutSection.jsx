@@ -165,13 +165,12 @@ const AboutSection = () => {
       <div style={styles.contentWrapper} className="about-content-wrapper">
         <div style={styles.textContainer} className="about-text-container">
           <h2 style={styles.heading} className="about-heading">
-            EdgeSpark IT Ventures:<br />
+            EdgeSpark IT Ventures<br />
             Building What's Next
           </h2>
           <p style={styles.paragraph} className="about-paragraph">
             EdgeSpark is a future-forward venture studio powering
-            businesses at the intersection of AI,<b>Technology</b> , <b>Media</b> , and
-            <b>Education</b>.
+            businesses at the intersection of <b>AI</b>,<b>Technology</b> , <b>Media</b> ,and <b>Education</b>.
           </p>
           <p style={styles.paragraph} className="about-paragraph">
             We don't just keep up with innovation, we lead it. Through

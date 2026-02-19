@@ -93,7 +93,7 @@ const TestimonialsSection = () => {
     container: {
       width: '100%',
       padding: '80px 40px',
-      backgroundColor: '#f8f9fa',
+      backgroundColor: '#ffffff',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       color: '#0a0f2c',
       boxSizing: 'border-box',
@@ -246,7 +246,7 @@ const TestimonialsSection = () => {
     <div ref={sectionRef} style={styles.container} className="testimonials-container">
       <style>{mediaQueryStyle}</style>
       <h2 ref={headingRef} style={styles.heading} className="testimonials-heading">
-        Customer Speaks..Real Stories. <br /> Real Impact.
+        Customer Speaks. <br /> Real Stories.. Real Impact...
       </h2>
       <div ref={sliderRef} style={styles.sliderContainer} className="testimonials-slider-container">
         <ArrowButton direction="left" onClick={() => handleNavigation('prev')} />

@@ -162,14 +162,6 @@ const VisionMissionSection = () => {
       transition: 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       transitionDelay: '0.5s',
       transformStyle: 'preserve-3d',
-      background: 'rgba(255, 255, 255, 0.02)',
-      padding: '20px',
-      borderRadius: '12px',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255, 255, 255, 0.05)',
-      boxShadow: isVisible 
-        ? '0 20px 60px rgba(0, 0, 0, 0.3)' 
-        : '0 5px 15px rgba(0, 0, 0, 0.1)',
     },
     missionItem: {
       flex: 1,
@@ -185,14 +177,6 @@ const VisionMissionSection = () => {
       transition: 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       transitionDelay: '0.7s',
       transformStyle: 'preserve-3d',
-      background: 'rgba(255, 255, 255, 0.02)',
-      padding: '20px',
-      borderRadius: '12px',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255, 255, 255, 0.05)',
-      boxShadow: isVisible 
-        ? '0 20px 60px rgba(0, 0, 0, 0.3)' 
-        : '0 5px 15px rgba(0, 0, 0, 0.1)',
     },
     itemHeader: {
       display: 'flex',
