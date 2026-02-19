@@ -291,71 +291,60 @@ function IndustriesWeServeSection() {
           @media (max-width: 540px) {
             .industries-grid {
               grid-template-columns: 1fr;
-              gap: 14px;
-              max-width: 420px;
+              gap: 16px;
+              max-width: 100%;
               margin: 0 auto;
             }
             .last-row {
               display: grid;
               grid-template-columns: 1fr;
-              gap: 14px;
+              gap: 16px;
             }
             .last-row .card-wrapper {
               flex: unset;
               width: 100%;
             }
             .industry-card {
-              padding: 18px 16px;
-              min-height: 110px;
-              border-radius: 10px;
+              padding: 28px;
+              min-height: auto;
+              border-radius: 14px;
             }
             .card-icon {
-              width: 40px;
-              height: 40px;
-              margin-bottom: 10px;
+              width: 48px;
+              height: 48px;
+              margin-bottom: 16px;
             }
             .card-icon img {
-              width: 40px !important;
-              height: 40px !important;
+              width: 48px !important;
+              height: 48px !important;
             }
             .card-title {
-              font-size: 0.9rem;
+              font-size: 1rem;
               line-height: 1.4;
             }
           }
 
           @media (max-width: 400px) {
             .industries-container {
-              padding: 40px 16px;
+              padding: 40px 20px;
             }
             .section-title {
               font-size: 1.5rem;
             }
             .section-description {
-              font-size: 0.9rem !important;
+              font-size: 0.95rem !important;
             }
             .industries-grid {
-              max-width: 100%;
-              gap: 12px;
+              gap: 16px;
             }
             .last-row {
-              gap: 12px;
+              gap: 16px;
             }
             .industry-card {
-              padding: 16px 14px;
-              min-height: 100px;
-            }
-            .card-icon {
-              width: 36px;
-              height: 36px;
-              margin-bottom: 8px;
-            }
-            .card-icon img {
-              width: 36px !important;
-              height: 36px !important;
+              padding: 24px;
             }
             .card-title {
-              font-size: 0.85rem;
+              font-size: 0.95rem;
             }
           }
 
