@@ -16,13 +16,13 @@ const FounderVoiceSection = () => {
   const voices = [
     {
       quote: "Our vision is to use technology as a force multiplier not just for business growth, but for building a smarter, more sustainable world. We believe in leveraging AI, automation, and digital intelligence to create inclusive ecosystems where innovation empowers people, industries, and the planet.",
-      authorName: "Swati Gupta, CEO founder",
+      authorName: "Swati Gupta,Founder & CEO",
       authorTitle: "EdgeSpark Group of Companies",
       image: require('../images/Group 24321.png')
     },
     {
       quote: "At EdgeSpark, we don't just build solutions, we engineer the future. Our focus is on creating intelligent, sustainable, and human-centered innovations that empower organizations to lead with clarity and confidence in the age of Al. Every experience we deliver is designed to spark transformation that lasts.",
-      authorName: "Puneet Agarwal, Co-Founder",
+      authorName: "Puneet Agarwal, Co-Founder & CVO",
       authorTitle: "EdgeSpark Group of Companies",
       image: require('../images/PuneetSir.png')
     }

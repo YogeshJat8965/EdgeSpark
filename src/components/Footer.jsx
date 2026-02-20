@@ -46,7 +46,7 @@ const Footer = () => {
       letterSpacing: '-0.5px',
     },
     logoImage: {
-      height: '50px',
+      height: '120px',
       marginBottom: '28px',
       display: 'block',
     },
@@ -124,7 +124,7 @@ const Footer = () => {
           {/* Column 1: Logo and Info */}
           <div style={styles.logoColumn}>
           <img 
-            src={require('../images/Edgespark/Image 6.png')} 
+            src={require('../images/Edgespark_Logo.png')} 
             alt="EdgeSpark Logo" 
             style={styles.logoImage}
           />
