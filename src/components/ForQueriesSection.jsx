@@ -514,7 +514,7 @@ function ForQueriesSection() {
               </div>
               <div className="contact-details">
                 <p>For more queries, speak to</p>
-                <p className="highlight">+91 12345 6789</p>
+                <p className="highlight">+91 9136961978</p>
               </div>
             </div>
 
@@ -532,7 +532,7 @@ function ForQueriesSection() {
               </div>
               <div className="contact-details">
                 <p>Email Us</p>
-                <p className="highlight">contactus@.com</p>
+                <p className="highlight">contact@edgespark.in</p>
               </div>
             </div>
           </div>
